@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -25,6 +27,8 @@ public class Personagem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
     
+    @NotNull
+    @Size( min = 3, max = 20 )
     private String nome;
 
     public Long getCodigo() {
@@ -35,12 +39,12 @@ public class Personagem {
         this.codigo = codigo;
     }
 
-    public String getName() {
+    public String getNome() {
         return nome;
     }
 
-    public void setName(String name) {
-        this.nome = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
     
     @Override
