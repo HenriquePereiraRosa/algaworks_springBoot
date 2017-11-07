@@ -26,6 +26,12 @@ public class Pessoa {
     
     private String nome;
     private boolean ativo;
-    private Endereco endereco;
+    private String logradouro;
+    private String numero;
+    private String complemento;
+    private String bairro;
+    private String CEP;
+    private String cidade;
+    private String estado;
     
 }

@@ -47,16 +47,17 @@ public class PersonagemResource {
         return ResponseEntity.created( uri ).body( personagemSaved );
     }
     
-    @GetMapping( "/{codigo}")
+    //SerchByCod
+    @GetMapping("/{codigo}")
     public ResponseEntity<Personagem> serchByCode( @PathVariable Long codigo ) {
         Personagem personagem = personagemRepository.findOne( codigo );
         return ( personagem == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( personagem );
     }
     
-    // ToDo: fix the searchByName method
-    @GetMapping( "/{nome}")
-    public ResponseEntity<Personagem> serchByNome( @PathVariable Personagem personagemSended ) {
-        Personagem personagem = personagemRepository.findOne( personagemSended.getCodigo() );
+    // SerchByName
+    @GetMapping("/searchbyname/{nome}")
+    public ResponseEntity<Personagem> serchByNome( @PathVariable String nome ) {
+        Personagem personagem = personagemRepository.findByNome( nome );
         return ( personagem == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( personagem );
     }
     

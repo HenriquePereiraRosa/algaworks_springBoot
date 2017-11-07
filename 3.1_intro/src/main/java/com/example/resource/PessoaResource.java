@@ -5,8 +5,6 @@
  */
 package com.example.resource;
 
-import com.example.model.Endereco;
-
 /**
  *
  * @author user
@@ -15,5 +13,4 @@ public class PessoaResource {
     
     private String nome;
     private boolean ativo;
-    private Endereco endereco;
 }
