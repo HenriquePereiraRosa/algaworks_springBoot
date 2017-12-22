@@ -55,14 +55,14 @@
             <scope>test</scope>
         </dependency>
         
-        <!-- mysql -->
+        <!-- mysql Driver-->
         <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <scope>runtime</scope>
         </dependency>
         
-        <!-- Migrations FlayWay -->
+        <!-- FlayWay db Migrations -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
