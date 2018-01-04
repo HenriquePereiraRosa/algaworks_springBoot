@@ -5,10 +5,19 @@
  */
 package com.example.repository;
 
+import com.example.model.Pessoa;
+import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *
  * @author user
  */
-public class PessoaRepository {
+public interface PessoaRepository extends JpaRepository< Pessoa, Long > {
     
+    Pessoa findByNome( String nome );
+    
+    Pessoa findByAtivo( boolean ativo );
+    
+    Pessoa findByLogradouro( String logradouro );
+    
+    Pessoa findByNumero( String numero );
 }
