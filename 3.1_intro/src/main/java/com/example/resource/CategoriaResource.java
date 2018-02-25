@@ -5,10 +5,15 @@
  */
 package com.example.resource;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
  * @author user
  */
+@RestController
+@RequestMapping("/Categoria")
 public class CategoriaResource {
     
 }

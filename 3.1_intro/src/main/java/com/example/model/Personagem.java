@@ -25,18 +25,18 @@ public class Personagem {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long codigo;
+    private Long idPersonagem;
     
     @NotNull
     @Size( min = 3, max = 20 )
     private String nome;
 
     public Long getCodigo() {
-        return codigo;
+        return idPersonagem;
     }
 
     public void setCodigo(Long codigo) {
-        this.codigo = codigo;
+        this.idPersonagem = codigo;
     }
 
     public String getNome() {
@@ -51,7 +51,7 @@ public class Personagem {
     public int hashCode() {
             final int prime = 31;
             int result = 1;
-            result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+            result = prime * result + ((idPersonagem == null) ? 0 : idPersonagem.hashCode());
             return result;
     }
 
@@ -64,10 +64,10 @@ public class Personagem {
             if (getClass() != obj.getClass())
                     return false;
             Personagem other = (Personagem) obj;
-            if (codigo == null) {
-                    if (other.codigo != null)
+            if (idPersonagem == null) {
+                    if (other.idPersonagem != null)
                             return false;
-            } else if (!codigo.equals(other.codigo))
+            } else if (!idPersonagem.equals(other.idPersonagem))
                     return false;
             return true;
     }
