@@ -41,16 +41,16 @@ public class PersonagemResource {
     @PostMapping
     public ResponseEntity<Personagem> saveOnDb( @Valid @RequestBody Personagem personagem, HttpServletResponse response){
         Personagem personagemSaved = personagemRepository.save( personagem );
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{codigo}")
-                .buildAndExpand( personagemSaved.getCodigo() ).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+                .buildAndExpand( personagemSaved.getId() ).toUri();
         response.setHeader( "Location", uri.toASCIIString() );
         return ResponseEntity.created( uri ).body( personagemSaved );
     }
     
     //SerchByCod
-    @GetMapping("/{codigo}")
-    public ResponseEntity<Personagem> serchByCode( @PathVariable Long codigo ) {
-        Personagem personagem = personagemRepository.findOne( codigo );
+    @GetMapping("/{id}")
+    public ResponseEntity<Personagem> serchByCode( @PathVariable Long id ) {
+        Personagem personagem = personagemRepository.findOne( id );
         return ( personagem == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( personagem );
     }
     

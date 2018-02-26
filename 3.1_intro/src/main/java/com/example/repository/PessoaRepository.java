@@ -19,7 +19,6 @@ public interface PessoaRepository extends JpaRepository< Pessoa, Long > {
     
     Pessoa findByAtivo( boolean ativo );
     
-    Pessoa findByLogradouro( String logradouro );
-    
-    Pessoa findByNumero( String numero );
+    Pessoa findByEndereco( String endereco );
+  
 }
