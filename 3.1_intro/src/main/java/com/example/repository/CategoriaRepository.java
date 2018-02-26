@@ -5,10 +5,15 @@
  */
 package com.example.repository;
 
+import com.example.model.Categoria;
+import org.springframework.data.jpa.repository.JpaRepository;
+
 /**
  *
  * @author user
  */
-public class CategoriaRepository {
+public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
+    
+    Categoria findById( Long id );
     
 }
