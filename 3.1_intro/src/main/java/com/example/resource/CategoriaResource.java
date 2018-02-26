@@ -5,6 +5,11 @@
  */
 package com.example.resource;
 
+import com.example.model.Categoria;
+import com.example.repository.CategoriaRepository;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,4 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/Categoria")
 public class CategoriaResource {
     
+    @Autowired
+    private CategoriaRepository categoriaRepository;
+    
+    @GetMapping
+    public List<Categoria> listar() {
+        return categoriaRepository.findAll();
+    }
 }
