@@ -30,7 +30,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class introExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
-    private MessageSource messageSource; 
+    private MessageSource messageSource; // Spring Object to get the messages from messages.properties file.
     
     private List<Erro> criateErrorList( BindingResult bindingResult ) {
         List<Erro> errors = new ArrayList(); 
@@ -42,6 +42,7 @@ public class introExceptionHandler extends ResponseEntityExceptionHandler {
         return errors;
     }
     
+    // Send invalid resiquition message error
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, 
             HttpHeaders headers, HttpStatus status, WebRequest request) {
@@ -49,14 +50,14 @@ public class introExceptionHandler extends ResponseEntityExceptionHandler {
         String mensagemDesenvolvedor = ex.getCause().toString();
         List<Erro> errors = Arrays.asList( new Erro( mensagemUsuario, mensagemDesenvolvedor ) );
         return handleExceptionInternal(ex, errors,
-                headers, HttpStatus.BAD_REQUEST, request); //To change body of generated methods, choose Tools | Templates.
+                headers, HttpStatus.BAD_REQUEST, request);
     }
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
         List<Erro> errors = criateErrorList( ex.getBindingResult() );
-        return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request); //To change body of generated methods, choose Tools | Templates.
+        return handleExceptionInternal(ex, errors, headers, HttpStatus.BAD_REQUEST, request); 
     }
     
     
@@ -86,9 +87,7 @@ public class introExceptionHandler extends ResponseEntityExceptionHandler {
         public void setMensagemDesenvovedor(String mensagemDesenvovedor) {
             this.mensagemDesenvovedor = mensagemDesenvovedor;
         }
-            
-            
-    }
-    
+                        
+    }    
     
 }
