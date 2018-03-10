@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,14 +31,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice // Notation to observe Exceptions for entire application
 public class IntroExceptionHandler extends ResponseEntityExceptionHandler {
 
-
     @Autowired
     private MessageSource messageSource; // Spring Object to get the messages from messages.properties file.
-    
     
     @ExceptionHandler({EmptyResultDataAccessException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleEmptyResultDataAccessException(){
+    
+    }
+    
+    
+    @ExceptionHandler({InvalidDataAccessApiUsageException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public void handleInvalidDataAccessApiUsageException(){
     
     }
     

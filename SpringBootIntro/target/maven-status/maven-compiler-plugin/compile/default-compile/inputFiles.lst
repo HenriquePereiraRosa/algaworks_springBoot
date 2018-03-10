@@ -7,6 +7,7 @@ C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\PessoaResource.java
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\BasicApplication.java
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\repository\CategoriaRepository.java
+C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\exceptionHandler\IntroExceptionHandler.java
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\exceptionHandler\IntroResponseEntityExceptionHandler.java
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\repository\PersonagemRepository.java
 C:\Dev\training\algaworks\Rest\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\PersonagemResource.java
