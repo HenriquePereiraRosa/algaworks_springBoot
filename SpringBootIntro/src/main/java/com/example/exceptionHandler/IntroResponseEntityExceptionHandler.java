@@ -26,8 +26,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  *
  * @author user
  */
-@ControllerAdvice
-public class introExceptionHandler extends ResponseEntityExceptionHandler {
+@ControllerAdvice // Notation to observe Exceptions for entire application
+public class IntroResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Autowired
     private MessageSource messageSource; // Spring Object to get the messages from messages.properties file.
@@ -35,24 +35,26 @@ public class introExceptionHandler extends ResponseEntityExceptionHandler {
     private List<Erro> criateErrorList( BindingResult bindingResult ) {
         List<Erro> errors = new ArrayList(); 
         for( FieldError fieldError : bindingResult.getFieldErrors() ) {
-            String mensagemUsuario = messageSource.getMessage( fieldError, LocaleContextHolder.getLocale() );
+            String mensagemUsuario = messageSource.getMessage(fieldError, LocaleContextHolder.getLocale());
             String mensaDesenvolvedor = fieldError.toString();
             errors.add( new Erro( mensagemUsuario, mensaDesenvolvedor ));
         }
         return errors;
     }
     
-    // Send invalid resiquition message error
+    // Send message for Invalid resiquition( eg: invalid field) message.
     @Override
     protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, 
             HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String mensagemUsuario = messageSource.getMessage( "resquisicao.invalida", null, LocaleContextHolder.getLocale() );
-        String mensagemDesenvolvedor = ex.getCause().toString();
+        String mensagemUsuario = messageSource.getMessage("requisicao.invalida", null, LocaleContextHolder.getLocale());
+        String mensagemDesenvolvedor = messageSource.getMessage("leia.atentamente", null, LocaleContextHolder.getLocale())
+                + ex.getCause().toString();
         List<Erro> errors = Arrays.asList( new Erro( mensagemUsuario, mensagemDesenvolvedor ) );
         return handleExceptionInternal(ex, errors,
                 headers, HttpStatus.BAD_REQUEST, request);
     }
 
+    // Send message for Invalid field value.
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
             HttpHeaders headers, HttpStatus status, WebRequest request) {
