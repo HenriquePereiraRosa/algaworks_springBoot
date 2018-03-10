@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Entity
-@Table( name = "pessoa" )
+@Table(name = "pessoa")
 public class Pessoa {
     
     @Id
