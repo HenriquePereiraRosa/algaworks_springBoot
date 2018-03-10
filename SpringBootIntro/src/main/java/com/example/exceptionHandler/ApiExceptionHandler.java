@@ -69,7 +69,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     // Send a message when is tried to delete a non existing resource
     @ExceptionHandler({EmptyResultDataAccessException.class})
     public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException ex, WebRequest request) {
-		String mensagemUsuario = messageSource.getMessage("recurso.nao.encontrado", null, LocaleContextHolder.getLocale());
+		String mensagemUsuario = messageSource.getMessage("recurso.nao.existe", null, LocaleContextHolder.getLocale());
 		String mensagemDesenvolvedor = ex.toString();
 		List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
@@ -78,12 +78,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     // Send a message when is tried to delete a non existing resource
     @ExceptionHandler({InvalidDataAccessApiUsageException.class})
     public ResponseEntity<Object> handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException ex, WebRequest request) {
-        String mensagemUsuario = messageSource.getMessage("recurso.nao.encontrado", null, LocaleContextHolder.getLocale());
+        String mensagemUsuario = messageSource.getMessage("recurso.nao.existe", null, LocaleContextHolder.getLocale());
         String mensagemDesenvolvedor = ex.toString();
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
     
+    
+    // Send a message when is tried to delete a non existing resource
+    @ExceptionHandler({IllegalArgumentException.class})
+    public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException ex, WebRequest request) {
+        String mensagemUsuario = messageSource.getMessage("recurso.alvo.nao.pode.ser.null", null, LocaleContextHolder.getLocale());
+        String mensagemDesenvolvedor = ex.toString();
+        List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    }
     
     
     
