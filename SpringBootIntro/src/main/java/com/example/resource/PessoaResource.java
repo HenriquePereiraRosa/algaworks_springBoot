@@ -98,6 +98,14 @@ public class PessoaResource {
         return ResponseEntity.ok(pessoaInDB);        
     }
     
+    // Update partially ativo property
+    @PutMapping("/{id}/ativo")
+    public ResponseEntity<Pessoa> updatePartiallyAtivo(@PathVariable Long id, @RequestBody Boolean ativo){
+        pessoaService.atualizarPropriedadeAtivo(id, ativo);
+        Pessoa pessoaInDB = pessoaRepository.findOne(id);
+        return ResponseEntity.ok(pessoaInDB);
+    }
+
     // Update partially a resource. ToDo: Not working!!!
     @PatchMapping("/{id}")
     public ResponseEntity<Pessoa> updatePartially(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
