@@ -5,6 +5,7 @@
  */
 package com.example.exceptionHandler;
 
+import com.example.service.exception.PessoaInexistenteOuInativaException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -101,6 +102,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String mensagemUsuario = messageSource.getMessage("recurso.operacao-nao-permitida", null, LocaleContextHolder.getLocale());
         String mensagemDesenvolvedor = ex.toString();
         List<Erro> erros = Arrays.asList(new Erro(mensagemUsuario, mensagemDesenvolvedor));
+        return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+    
+    
+    // This exception could be handled in ApiExceptionHandler.java, but how is an especific exception, could be handled here too.
+    @ExceptionHandler({PessoaInexistenteOuInativaException.class})
+    public ResponseEntity<Object> handlePessoaInexistenteOuInativaException(PessoaInexistenteOuInativaException ex, WebRequest request) {
+        String mensagemUsuario = messageSource.getMessage("pessoa.inexistente-inativa", null, LocaleContextHolder.getLocale());
+        String mensagemDesenvolvedor = ex.toString();
+        List<ApiExceptionHandler.Erro> erros = Arrays.asList(new ApiExceptionHandler.Erro(mensagemUsuario, mensagemDesenvolvedor));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
     
