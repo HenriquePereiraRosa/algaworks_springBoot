@@ -18,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -32,9 +33,11 @@ public class Lancamento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
     private String descricao;
     
     // Necessary because of the diference between Table column name and object model atribute
+    @NotNull
     @Column(name = "data_vencimento") 
     private LocalDate dataVencimento;
     
@@ -42,18 +45,23 @@ public class Lancamento {
     @Column(name = "data_pagamento") 
     private LocalDate dataPagamento;
     
+    @NotNull
     private BigDecimal valor;
     
+    @NotNull
     @Enumerated(EnumType.STRING)
     private TipoLancamento tipo;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_categoria")
     private Categoria categoria;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_pessoa")
     private Pessoa pessoa;
+
 
     public Long getId() {
         return id;
