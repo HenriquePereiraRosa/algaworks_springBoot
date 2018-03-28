@@ -1,8 +1,10 @@
+C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\model\TipoLancamento.java
+C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\model\Lancamento.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\repository\CategoriaRepository.java
+C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\repository\LancamentoRepository.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\exceptionHandler\ApiExceptionHandler.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\BasicApplication.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\model\Categoria.java
-C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\CategoriaResource.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\PessoaResource.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\model\Endereco.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\model\Personagem.java
@@ -12,4 +14,5 @@ C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\exam
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\repository\PersonagemRepository.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\service\PessoaService.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\PersonagemResource.java
+C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\resource\LancamentoResource.java
 C:\Dev\software\algaWorks\springBootIntro\SpringBootIntro\src\main\java\com\example\event\RecursoCriadoEvent.java

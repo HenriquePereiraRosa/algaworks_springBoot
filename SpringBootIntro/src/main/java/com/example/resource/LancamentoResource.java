@@ -6,8 +6,8 @@
 package com.example.resource;
 
 import com.example.event.RecursoCriadoEvent;
-import com.example.model.Categoria;
-import com.example.repository.CategoriaRepository;
+import com.example.model.Lancamento;
+import com.example.repository.LancamentoRepository;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -16,6 +16,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,27 +27,34 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/lancamento")
 public class LancamentoResource {
     
     @Autowired
-    private CategoriaRepository categoriaRepository;
+    private LancamentoRepository lancamentoRepository;
     
     @Autowired
     private ApplicationEventPublisher publisher;
     
-    @GetMapping
-    public List<Categoria> listar() {
-        return categoriaRepository.findAll();
+   @GetMapping
+    public List<Lancamento> listar() {
+        return lancamentoRepository.findAll();
     }
     
     // Save on db method
     @PostMapping
-    public ResponseEntity<Categoria> saveOnDb( @Valid @RequestBody Categoria categoria, HttpServletResponse response){
-        Categoria objectSaved = categoriaRepository.save( categoria );
+    public ResponseEntity<Lancamento> saveOnDb( @Valid @RequestBody Lancamento lancamento, HttpServletResponse response){
+        Lancamento objectSaved = lancamentoRepository.save(lancamento);
         
-        publisher.publishEvent( new RecursoCriadoEvent( this, response, objectSaved.getId())); // Create an event when an object is saved
+        publisher.publishEvent(new RecursoCriadoEvent(this, response, objectSaved.getId())); // Create an event when an object is saved
         
-        return ResponseEntity.status(HttpStatus.CREATED).body( objectSaved );
+        return ResponseEntity.status(HttpStatus.CREATED).body(objectSaved);
+    }
+    
+    // SerchById
+    @GetMapping("/{id}")
+    public ResponseEntity<? extends Object> searchById( @PathVariable Long id ) {
+        Lancamento lancamento = lancamentoRepository.findOne(id);
+        return (lancamento == null)? ResponseEntity.notFound().build() : ResponseEntity.ok(lancamento);
     }
 }

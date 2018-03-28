@@ -62,14 +62,14 @@ public class PessoaResource {
     
     // SerchById
     @GetMapping("/{id}")
-    public ResponseEntity<Pessoa> serchByNome( @PathVariable Long id ) {
+    public ResponseEntity<Pessoa> searchByNome( @PathVariable Long id ) {
         Pessoa pessoa = pessoaRepository.findOne(id);
         return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
     }
     
     // SerchByName
     @GetMapping("/searchbyname/{nome}")
-    public ResponseEntity<Pessoa> serchByNome( @PathVariable String nome ) {
+    public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
         Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
         return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
     }
