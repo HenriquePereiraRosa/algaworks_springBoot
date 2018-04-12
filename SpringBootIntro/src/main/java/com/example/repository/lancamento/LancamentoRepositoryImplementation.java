@@ -7,7 +7,9 @@ package com.example.repository.lancamento;
 
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
+//import java.time.LocalDate;  #Error
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -54,12 +56,14 @@ public class LancamentoRepositoryImplementation implements LancamentoRepositoryQ
         
         if(lancamentoFilter.getInitialDate() != null){
             predicates.add(
-                    builder.greaterThanOrEqualTo(root.get("initialDate"), lancamentoFilter.getInitialDate()));
+                    builder.greaterThanOrEqualTo(root.<Date>get("initialDate"),
+                            lancamentoFilter.getInitialDate()));
         }
         
         if(lancamentoFilter.getFinalDate() != null){
             predicates.add(
-                    builder.lessThanOrEqualTo(root.get("initialDate"), lancamentoFilter.getInitialDate()));
+                    builder.lessThanOrEqualTo(root.<Date>get("finallDate"),
+                            lancamentoFilter.getFinalDate()));
         }        
         
         return predicates.toArray(new Predicate[predicates.size()]);

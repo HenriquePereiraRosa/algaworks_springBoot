@@ -6,6 +6,7 @@
 package com.example.repository.filter;
 
 import java.time.LocalDate;
+import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -17,10 +18,10 @@ public class LancamentoFilter {
     private String descricao;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private LocalDate initialDate;
+    private Date initialDate;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private LocalDate finalDate;
+    private Date finalDate;
 
     public String getDescricao() {
         return descricao;
@@ -30,19 +31,19 @@ public class LancamentoFilter {
         this.descricao = descricao;
     }
 
-    public LocalDate getInitialDate() {
+    public Date getInitialDate() {
         return initialDate;
     }
 
-    public void setInitialDate(LocalDate initialDate) {
+    public void setInitialDate(Date initialDate) {
         this.initialDate = initialDate;
     }
 
-    public LocalDate getFinalDate() {
+    public Date getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(LocalDate finalDate) {
+    public void setFinalDate(Date finalDate) {
         this.finalDate = finalDate;
     }
     
