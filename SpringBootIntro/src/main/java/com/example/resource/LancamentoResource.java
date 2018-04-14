@@ -10,11 +10,12 @@ import com.example.model.Lancamento;
 import com.example.repository.LancamentoRepository;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.service.LancamentoService;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,8 +46,8 @@ public class LancamentoResource {
             
     
    @GetMapping
-    public List<Lancamento> search(LancamentoFilter lancamentoFilter) {
-        return lancamentoRepository.findAll();
+    public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.search(lancamentoFilter, pageable);
     }
     
     // Save on db method

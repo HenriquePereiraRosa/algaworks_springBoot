@@ -7,7 +7,7 @@ package com.example.repository.lancamento;
 
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
-//import java.time.LocalDate;  #Error
+//import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,6 +18,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
 /**
@@ -30,7 +33,7 @@ public class LancamentoRepositoryImplementation implements LancamentoRepositoryQ
     private EntityManager manager;
     
     @Override
-    public List<Lancamento> search(LancamentoFilter lancamentoFilter) {
+    public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
         Root<Lancamento> root = criteria.from(Lancamento.class);
@@ -40,7 +43,8 @@ public class LancamentoRepositoryImplementation implements LancamentoRepositoryQ
         criteria.where(predicates);
         
         TypedQuery<Lancamento> query = manager.createQuery(criteria);
-        return query.getResultList();
+        adicionarRestricoesDePagina(query, pageable);
+        return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
     }
 
     private Predicate[] criateRestrictions(LancamentoFilter lancamentoFilter,
@@ -67,6 +71,27 @@ public class LancamentoRepositoryImplementation implements LancamentoRepositoryQ
         }        
         
         return predicates.toArray(new Predicate[predicates.size()]);
+    }
+
+    private void adicionarRestricoesDePagina(TypedQuery<Lancamento> query, Pageable pageable) {
+        int paginaAtual = pageable.getPageNumber();
+        int totalRegistrosPorPagina = pageable.getPageSize();
+        int primeiroRegistroPagina = paginaAtual * totalRegistrosPorPagina;
+        
+        query.setFirstResult(primeiroRegistroPagina);
+        query.setMaxResults(totalRegistrosPorPagina);
+    }
+    
+    private Long total(LancamentoFilter lancamentoFilter) {
+       CriteriaBuilder builder = manager.getCriteriaBuilder();
+       CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
+       Root<Lancamento> root = criteria.from(Lancamento.class);
+       
+       Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
+       criteria.where(predicates);
+       criteria.select(builder.count(root));
+       
+       return manager.createQuery(criteria).getSingleResult();
     }
     
 }

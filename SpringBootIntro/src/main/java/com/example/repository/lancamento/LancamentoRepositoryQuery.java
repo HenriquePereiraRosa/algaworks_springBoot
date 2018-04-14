@@ -7,7 +7,8 @@ package com.example.repository.lancamento;
 
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 /**
  *
@@ -15,5 +16,5 @@ import java.util.List;
  */
 public interface LancamentoRepositoryQuery {
     
-    public List<Lancamento> search(LancamentoFilter lancamentoFilter);
+    public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable);
 }

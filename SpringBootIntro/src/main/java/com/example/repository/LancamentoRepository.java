@@ -6,13 +6,14 @@
 package com.example.repository;
 
 import com.example.model.Lancamento;
+import com.example.repository.lancamento.LancamentoRepositoryQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  *
  * @author user
  */
-public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
+public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, LancamentoRepositoryQuery {
     
     Lancamento findById( Long id );
     
