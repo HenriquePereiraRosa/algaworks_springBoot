@@ -27,7 +27,7 @@ import org.springframework.util.StringUtils;
  *
  * @author user
  */
-public class LancamentoRepositoryImplementation implements LancamentoRepositoryQuery {
+public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
     @PersistenceContext // Enable the consults
     private EntityManager manager;
@@ -58,16 +58,16 @@ public class LancamentoRepositoryImplementation implements LancamentoRepositoryQ
             
         }
         
-        if(lancamentoFilter.getInitialDate() != null){
+        if(lancamentoFilter.getDataVencimentoDe() != null){
             predicates.add(
-                    builder.greaterThanOrEqualTo(root.<Date>get("initialDate"),
-                            lancamentoFilter.getInitialDate()));
+                    builder.greaterThanOrEqualTo(root.<Date>get("dataVencimentoDe"),
+                            lancamentoFilter.getDataVencimentoDe()));
         }
         
-        if(lancamentoFilter.getFinalDate() != null){
+        if(lancamentoFilter.getDataVencimentoAte() != null){
             predicates.add(
-                    builder.lessThanOrEqualTo(root.<Date>get("finallDate"),
-                            lancamentoFilter.getFinalDate()));
+                    builder.lessThanOrEqualTo(root.<Date>get("dataVencimentoAte"),
+                            lancamentoFilter.getDataVencimentoAte()));
         }        
         
         return predicates.toArray(new Predicate[predicates.size()]);

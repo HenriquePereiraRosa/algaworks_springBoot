@@ -18,10 +18,10 @@ public class LancamentoFilter {
     private String descricao;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private Date initialDate;
+    private Date dataVencimentoDe;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private Date finalDate;
+    private Date dataVencimentoAte;
 
     public String getDescricao() {
         return descricao;
@@ -31,20 +31,20 @@ public class LancamentoFilter {
         this.descricao = descricao;
     }
 
-    public Date getInitialDate() {
-        return initialDate;
+    public Date getDataVencimentoDe() {
+        return dataVencimentoDe;
     }
 
-    public void setInitialDate(Date initialDate) {
-        this.initialDate = initialDate;
+    public void setDataVencimentoDe(Date dataVencimentoDe) {
+        this.dataVencimentoDe = dataVencimentoDe;
     }
 
-    public Date getFinalDate() {
-        return finalDate;
+    public Date getDataVencimentoAte() {
+        return dataVencimentoAte;
     }
 
-    public void setFinalDate(Date finalDate) {
-        this.finalDate = finalDate;
+    public void setDataVencimentoAte(Date dataVencimentoAte) {
+        this.dataVencimentoAte = dataVencimentoAte;
     }
     
     
