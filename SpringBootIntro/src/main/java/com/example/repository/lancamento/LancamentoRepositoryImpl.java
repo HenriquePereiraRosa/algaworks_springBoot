@@ -29,7 +29,7 @@ import org.springframework.util.StringUtils;
  */
 public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
-    @PersistenceContext // Enable the consults
+    @PersistenceContext // Enable the consults | search Method
     private EntityManager manager;
     
     @Override
@@ -46,6 +46,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         adicionarRestricoesDePagina(query, pageable);
         return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
     }
+    
 
     private Predicate[] criateRestrictions(LancamentoFilter lancamentoFilter,
                             CriteriaBuilder builder, Root<Lancamento> root) {
@@ -60,13 +61,13 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         
         if(lancamentoFilter.getDataVencimentoDe() != null){
             predicates.add(builder.greaterThanOrEqualTo(
-                    root.<Date>get("dataVencimentoDe"),
+                    root.<Date>get("dataVencimento"),
                     lancamentoFilter.getDataVencimentoDe()));
         }
         
         if(lancamentoFilter.getDataVencimentoAte() != null){
             predicates.add(builder.lessThanOrEqualTo(
-                    root.<Date>get("dataVencimentoAte"),
+                    root.<Date>get("dataVencimento"),
                     lancamentoFilter.getDataVencimentoAte()));
         }        
         
