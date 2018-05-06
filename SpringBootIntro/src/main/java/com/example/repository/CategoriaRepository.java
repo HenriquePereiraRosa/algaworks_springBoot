@@ -14,6 +14,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
     
-    Categoria findById( Long id );
+    Categoria findById(Long id);
     
+    Categoria findByNome(String nome);
+    
+    Categoria findByNomeContaining(String nome);
 }

@@ -13,12 +13,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface PessoaRepository extends JpaRepository< Pessoa, Long > {
     
-    Pessoa findByNome( String nome );
+    Pessoa findByNome(String nome);
     
-    Pessoa findByNomeContaining( String nome);
+    Pessoa findByNomeContaining(String nome);
     
-    Pessoa findByAtivo( boolean ativo );
+    Pessoa findByAtivo(boolean ativo);
     
-    Pessoa findByEndereco( String endereco );
+    Pessoa findByEndereco(String endereco);
   
 }
