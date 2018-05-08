@@ -42,8 +42,6 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
         String refreshToken = body.getRefreshToken().getValue();
         putRefreshTokenInCookie(refreshToken, requestLocal, responseLocal);
         removeRefreshTokenfromBody(token);
-        System.out.println("TOKEN:" +token);
-        System.out.println("BODY: " + body);
         return body;
     }
 
