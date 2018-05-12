@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +51,8 @@ public class CategoriaResource {
     
     // Save on db method
     @PostMapping
+    // Verify the user ROLE acess and appClient scopes 
+    @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
     public ResponseEntity<Categoria> saveOnDb( @Valid @RequestBody Categoria categoria, HttpServletResponse response){
         Categoria objectSaved = categoriaRepository.save( categoria );
         

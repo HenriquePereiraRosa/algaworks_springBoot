@@ -8,17 +8,21 @@ package com.example.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
+@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable the ROLES permission in data base
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     
     @Autowired
@@ -30,7 +34,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .secret("angularpassword")  // password of the client application
                 .scopes("read", "write") // Limits the client app access
                 .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(20)
+                .accessTokenValiditySeconds(200)
                 .refreshTokenValiditySeconds(3600 * 24);  // (3600 * 24) = one day
     }
     
@@ -52,6 +56,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
         accessTokenConverter.setSigningKey("admin");
         return accessTokenConverter;
+    }
+    
+    @Bean
+    public MethodSecurityExpressionHandler createExpressionHandler() {
+        return new OAuth2MethodSecurityExpressionHandler();
     }
 
 }
