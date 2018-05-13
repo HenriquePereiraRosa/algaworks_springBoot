@@ -30,7 +30,6 @@ public class ApiProperty {
     }
     
     
-    
     public static class Security {
         
         private boolean enableHttps;
