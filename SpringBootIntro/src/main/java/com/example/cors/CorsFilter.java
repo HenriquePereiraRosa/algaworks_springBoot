@@ -5,6 +5,7 @@
  */
 package com.example.cors;
 
+import com.example.config.property.ApiProperty;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,6 +15,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -27,7 +29,8 @@ import org.springframework.stereotype.Component;
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter {
 
-    private String allowedOrigin = "http://localhost:8000"; //TODO: Configure to different environments.
+    @Autowired
+    private ApiProperty apiProperty;
     
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -40,7 +43,7 @@ public class CorsFilter implements Filter {
         HttpServletRequest requestLocal = (HttpServletRequest) request;
         HttpServletResponse responseLocal = (HttpServletResponse) response;
         
-        if("OPTIONS".equals(requestLocal.getMethod()) && allowedOrigin.equals(requestLocal.getHeader("Origin"))) {
+        if("OPTIONS".equals(requestLocal.getMethod()) && apiProperty.getAllowedOrigin().equals(requestLocal.getHeader("Origin"))) {
             responseLocal.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
             responseLocal.setHeader("Access-Control-Max-Age", "3600");
             responseLocal.setStatus(HttpServletResponse.SC_OK);
