@@ -10,7 +10,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  *
  * @author user
  */
-@ConfigurationProperties("api")
+@ConfigurationProperties("app")
 public class ApiProperty {
     
     private String allowedOrigin = "http://localhost:8000";
