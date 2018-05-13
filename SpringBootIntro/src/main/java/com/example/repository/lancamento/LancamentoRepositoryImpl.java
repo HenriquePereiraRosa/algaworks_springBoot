@@ -58,14 +58,14 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         Root<Lancamento> root = criteria.from(Lancamento.class);
         
         criteria.select(builder.construct(ResumoLancamento.class, 
-            root.<Long>get("id"),
-            root.<String>get("descricao"),
-            root.<Date>get("dataVencimento"),
-            root.<Date>get("dataPagamento"),
-            root.<BigDecimal>get("valor"),
-            root.<TipoLancamento>get("tipo"),
-            root.<String>get("categoria"), //.get("descricao"), TODO: Fix this!
-            root.<String>get("pessoa")));
+            root.get("id"),
+            root.get("descricao"),
+            root.get("dataVencimento"),
+            root.get("dataPagamento"),
+            root.get("valor"),
+            root.get("tipo"),
+            root.get("categoria").get("nome"),
+            root.get("pessoa").get("nome")));
 
         // criate the restrictions
         Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
