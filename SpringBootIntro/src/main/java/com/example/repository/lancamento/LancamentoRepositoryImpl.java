@@ -6,7 +6,10 @@
 package com.example.repository.lancamento;
 
 import com.example.model.Lancamento;
+import com.example.model.TipoLancamento;
 import com.example.repository.filter.LancamentoFilter;
+import com.example.repository.projection.ResumoLancamento;
+import java.math.BigDecimal;
 //import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
 import java.util.Date;
@@ -47,6 +50,31 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
     }
     
+    @Override
+    public Page<ResumoLancamento> resume(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
+        Root<Lancamento> root = criteria.from(Lancamento.class);
+        
+        criteria.select(builder.construct(ResumoLancamento.class, 
+            root.<Long>get("id"),
+            root.<String>get("descricao"),
+            root.<Date>get("dataVencimento"),
+            root.<Date>get("dataPagamento"),
+            root.<BigDecimal>get("valor"),
+            root.<TipoLancamento>get("tipo"),
+            root.<String>get("categoria"), //.get("descricao"), TODO: Fix this!
+            root.<String>get("pessoa")));
+
+        // criate the restrictions
+        Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
+        criteria.where(predicates);
+        
+        TypedQuery<ResumoLancamento> query = manager.createQuery(criteria);
+        adicionarRestricoesDePagina(query, pageable);
+        return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
+    }
 
     private Predicate[] criateRestrictions(LancamentoFilter lancamentoFilter,
                             CriteriaBuilder builder, Root<Lancamento> root) {
@@ -74,7 +102,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         return predicates.toArray(new Predicate[predicates.size()]);
     }
 
-    private void adicionarRestricoesDePagina(TypedQuery<Lancamento> query, Pageable pageable) {
+    private void adicionarRestricoesDePagina(TypedQuery<?> query, Pageable pageable) {
         int paginaAtual = pageable.getPageNumber();
         int totalRegistrosPorPagina = pageable.getPageSize();
         int primeiroRegistroPagina = paginaAtual * totalRegistrosPorPagina;
@@ -94,5 +122,6 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
        
        return manager.createQuery(criteria).getSingleResult();
     }
+
     
 }

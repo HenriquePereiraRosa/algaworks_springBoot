@@ -9,6 +9,7 @@ import com.example.event.RecursoCriadoEvent;
 import com.example.model.Lancamento;
 import com.example.repository.LancamentoRepository;
 import com.example.repository.filter.LancamentoFilter;
+import com.example.repository.projection.ResumoLancamento;
 import com.example.service.LancamentoService;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -48,6 +49,11 @@ public class LancamentoResource {
    @GetMapping
     public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable) {
         return lancamentoRepository.search(lancamentoFilter, pageable);
+    } 
+    
+   @GetMapping(params = "resumo") // If there is an param called "resumo" in the requisition, then call this method.
+    public Page<ResumoLancamento> resume(LancamentoFilter lancamentoFilter, Pageable pageable) {
+        return lancamentoRepository.resume(lancamentoFilter, pageable);
     }
     
     // Save on db method
