@@ -28,7 +28,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Profile("oauth")
 @Configuration
 @EnableAuthorizationServer
-//@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable the ROLES permission in data base
+@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable the ROLES permission in data base
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     
     @Autowired

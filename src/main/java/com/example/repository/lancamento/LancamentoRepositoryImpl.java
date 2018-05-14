@@ -6,10 +6,8 @@
 package com.example.repository.lancamento;
 
 import com.example.model.Lancamento;
-import com.example.model.TipoLancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
-import java.math.BigDecimal;
 //import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
 import java.util.Date;
