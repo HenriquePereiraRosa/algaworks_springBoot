@@ -1,0 +1,30 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.example.config.property.ApiProperty",
+      "name": "app",
+      "type": "com.example.config.property.ApiProperty"
+    },
+    {
+      "sourceType": "com.example.config.property.ApiProperty",
+      "name": "app.security",
+      "sourceMethod": "getSecurity()",
+      "type": "com.example.config.property.ApiProperty$Security"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.example.config.property.ApiProperty",
+      "defaultValue": "http:\/\/localhost:8000",
+      "name": "app.allowed-origin",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.config.property.ApiProperty$Security",
+      "defaultValue": false,
+      "name": "app.security.enable-https",
+      "type": "java.lang.Boolean"
+    }
+  ]
+}
