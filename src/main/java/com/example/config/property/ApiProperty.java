@@ -13,7 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app")
 public class ApiProperty {
     
-    private String allowedOrigin = "http://localhost:8000";
+    private String allowedOrigin = 
+            "http://localhost:8000"+"http://localhost:4200"+"http://localhost:8080";
     
     private final Security security = new Security();
 

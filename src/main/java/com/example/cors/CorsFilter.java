@@ -43,7 +43,7 @@ public class CorsFilter implements Filter {
         HttpServletRequest requestLocal = (HttpServletRequest) request;
         HttpServletResponse responseLocal = (HttpServletResponse) response;
         
-        if("OPTIONS".equals(requestLocal.getMethod()) && apiProperty.getAllowedOrigin().equals(requestLocal.getHeader("Origin"))) {
+        if("OPTIONS".equals(requestLocal.getMethod()) && apiProperty.getAllowedOrigin().contains(requestLocal.getHeader("Origin"))) {
             responseLocal.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
             responseLocal.setHeader("Access-Control-Max-Age", "3600");
             responseLocal.setStatus(HttpServletResponse.SC_OK);
