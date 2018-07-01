@@ -13,12 +13,12 @@ import org.apache.catalina.util.ParameterMap;
  *
  * @author user
  */
-public class MyServLetRequestWrapper extends HttpServletRequestWrapper {
+public class MyServletRequestWrapper extends HttpServletRequestWrapper {
     
     private String refreshToken;
 
-    public MyServLetRequestWrapper(HttpServletRequest requestLocal, String refreshToken) {
-        super(requestLocal);
+    public MyServletRequestWrapper(HttpServletRequest request, String refreshToken) {
+        super(request);
         this.refreshToken = refreshToken;
     }
     

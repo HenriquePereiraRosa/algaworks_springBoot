@@ -5,7 +5,7 @@
  */
 package com.example.token;
 
-import com.example.token.wrapper.MyServLetRequestWrapper;
+import com.example.token.wrapper.MyServletRequestWrapper;
 import java.io.IOException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -15,11 +15,12 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-
+@Profile("oauth")
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class RefreshTokenCookiePreProcessorFilter implements Filter {
@@ -38,8 +39,10 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
                 && "refresh_token".equals(requestLocal.getParameter("grant_type"))
                 && (requestLocal.getCookies() != null)) {
             for(Cookie cookie : requestLocal.getCookies()){
-                String refreshToken = cookie.getValue();
-                requestLocal = new MyServLetRequestWrapper(requestLocal, refreshToken);
+                if (cookie.getName().equals("refreshToken")) {
+                    String refreshToken = cookie.getValue();
+                    requestLocal = new MyServletRequestWrapper(requestLocal, refreshToken);
+                }
             }            
         }
         
