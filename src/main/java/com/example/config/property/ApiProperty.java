@@ -13,7 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app")
 public class ApiProperty {
     
-    private String allowedOrigin = "https://angular-intro.herokuapp.com/";
+    private String allowedOrigin = "https://angular-intro.herokuapp.com";
     
     private final Security security = new Security();
 
