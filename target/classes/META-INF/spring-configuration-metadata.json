@@ -16,7 +16,7 @@
   "properties": [
     {
       "sourceType": "com.example.config.property.ApiProperty",
-      "defaultValue": "http:\/\/localhost:8000",
+      "defaultValue": "https:\/\/angular-intro.herokuapp.com\/",
       "name": "app.allowed-origin",
       "type": "java.lang.String"
     },
