@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -45,12 +46,14 @@ public class PessoaResource {
     @Autowired
     private ApplicationEventPublisher publisher;
     
+    @CrossOrigin
     @GetMapping
     public List<Pessoa> listar(){
         return pessoaRepository.findAll();
     }
     
     // Save on db method
+    @CrossOrigin
     @PostMapping
     public ResponseEntity<Pessoa> saveOnDb( @Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
         Pessoa objectSaved = pessoaRepository.save( pessoa );
@@ -61,13 +64,15 @@ public class PessoaResource {
     }
     
     // SerchById
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Pessoa> searchByNome( @PathVariable Long id ) {
-        Pessoa pessoa = pessoaRepository.findOne(id);
+        Pessoa pessoa = pessoaRepository.getOne(id);
         return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
     }
     
     // SerchByName
+    @CrossOrigin
     @GetMapping("/searchbyname/{nome}")
     public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
         Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
@@ -75,13 +80,15 @@ public class PessoaResource {
     }
     
     // Deletion By Id
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
-        pessoaRepository.delete(id);
+        pessoaRepository.deleteById(id);
     }
     
     // Deletion By Name
+    @CrossOrigin
     @DeleteMapping("/deletebyname/{nome}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
@@ -90,23 +97,26 @@ public class PessoaResource {
     }
     
     // Update a entire resourse and get it back to confirm
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Pessoa> update(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
-        Pessoa pessoaInDB = pessoaRepository.findOne(id);
+        Pessoa pessoaInDB = pessoaRepository.getOne(id);
         BeanUtils.copyProperties(pessoa, pessoaInDB, "id");
         pessoaRepository.save(pessoaInDB);
         return ResponseEntity.ok(pessoaInDB);        
     }
     
     // Update partially ativo property
+    @CrossOrigin
     @PutMapping("/{id}/ativo")
     public ResponseEntity<Pessoa> updatePartiallyAtivo(@PathVariable Long id, @RequestBody Boolean ativo){
         pessoaService.atualizarPropriedadeAtivo(id, ativo);
-        Pessoa pessoaInDB = pessoaRepository.findOne(id);
+        Pessoa pessoaInDB = pessoaRepository.getOne(id);
         return ResponseEntity.ok(pessoaInDB);
     }
 
     // Update partially a resource. ToDo: Not working!!!
+    @CrossOrigin
     @PatchMapping("/{id}")
     public ResponseEntity<Pessoa> updatePartially(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
         Pessoa pessoaInDB = pessoaService.atualizar(id, pessoa);

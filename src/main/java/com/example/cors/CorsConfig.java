@@ -28,6 +28,7 @@ public class CorsConfig {
 
         CorsConfiguration authConfig = new CorsConfiguration();
         authConfig.setAllowCredentials(true);
+        
         for(String origin : apiProperty.getAllowedOrigins()) {
             authConfig.addAllowedOrigin(origin); 
 
@@ -47,6 +48,7 @@ public class CorsConfig {
             System.out.println("");
             System.out.println("");
         }
+        
         authConfig.addAllowedHeader("Authorization");
         authConfig.addAllowedHeader("Content-Type");
         authConfig.addAllowedHeader("Accept");

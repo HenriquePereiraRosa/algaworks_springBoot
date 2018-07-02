@@ -13,10 +13,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.access.expression.method.MethodSecurityExpressionHandler;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.expression.OAuth2MethodSecurityExpressionHandler;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
@@ -27,21 +26,30 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Profile("oauth")
 @Configuration
-@EnableAuthorizationServer
-//@EnableGlobalMethodSecurity(prePostEnabled = true) // Enable the ROLES permission in data base
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     
     @Autowired
     private AuthenticationManager authenticationManager;
     
+    @Autowired
+    private UserDetailsService userDetailsService;
+    
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("angular")
-                .secret("angular")  // password of the client application
-                .scopes("read", "write") // Limits the client app access
-                .authorizedGrantTypes("password", "refresh_token")
-                .accessTokenValiditySeconds(2000) // TODO: Reconfigure this timing
-                .refreshTokenValiditySeconds(3600 * 24);  // One day
+        clients.inMemory()
+            .withClient("angular")
+            .secret("$2a$10$Y1Irb3xtvkJS6Lmlkcp8SO82qYSF1fKfmLWorCf7N0EXdooE4C0hq")  // password of the client application: angular
+            .scopes("read", "write") // Limits the client app access
+            .authorizedGrantTypes("password", "refresh_token")
+            .accessTokenValiditySeconds(2000) // TODO: Reconfigure this timing
+            .refreshTokenValiditySeconds(3600 * 24)  // One day
+        .and()
+            .withClient("mobile")
+            .secret("$2a$10$hokxf3JbWij5Fndcvzd/R.1eGliAUQ/oc7Ayx9r5cdLPO2wg.zWuS")  // password of the client application: mobile
+            .scopes("read") // Limits the client app access
+            .authorizedGrantTypes("password", "refresh_token")
+            .accessTokenValiditySeconds(2000) // TODO: Reconfigure this timing
+            .refreshTokenValiditySeconds(3600 * 24);  // One day
     }
     
     @Override
@@ -53,6 +61,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 tokenStore(tokenStore())
                 .tokenEnhancer(tokenAnhacerChain)
                 .reuseRefreshTokens(false)
+                .userDetailsService(userDetailsService)
                 .authenticationManager(authenticationManager);
     }
     

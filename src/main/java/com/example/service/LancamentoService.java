@@ -28,14 +28,14 @@ public class LancamentoService {
     private LancamentoRepository lancamentoRepository;
     
     public Lancamento salvar(Lancamento lancamento) {
-        Pessoa pessoa = pessoaRepository.findOne(lancamento.getPessoa().getId());
+        Pessoa pessoa = pessoaRepository.getOne(lancamento.getPessoa().getId());
         if((pessoa == null) || pessoa.isInativo())
             throw new PessoaInexistenteOuInativaException();
         return lancamentoRepository.save(lancamento);
     }
 
     private Lancamento buscarLancamentoPorId(Long id) {
-        Lancamento lancamento = lancamentoRepository.findOne(id);
+        Lancamento lancamento = lancamentoRepository.getOne(id);
         if(lancamento == null)
             throw new EmptyResultDataAccessException(1);
         return lancamento;

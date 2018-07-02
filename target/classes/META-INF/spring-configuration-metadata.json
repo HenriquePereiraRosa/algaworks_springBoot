@@ -16,9 +16,8 @@
   "properties": [
     {
       "sourceType": "com.example.config.property.ApiProperty",
-      "defaultValue": "https:\/\/angular-intro.herokuapp.com",
-      "name": "app.allowed-origin",
-      "type": "java.lang.String"
+      "name": "app.allowed-origins",
+      "type": "java.util.List<java.lang.String>"
     }
   ]
 }

@@ -35,6 +35,9 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
         
         HttpServletRequest requestLocal = (HttpServletRequest) request;
         
+        //////////////////////////////////////////////////////
+        System.out.println("RESQUEST: " + requestLocal.getParameter("grant_type"));
+        
         if("/oauth/token".equalsIgnoreCase(requestLocal.getRequestURI())
                 && "refresh_token".equals(requestLocal.getParameter("grant_type"))
                 && (requestLocal.getCookies() != null)) {
@@ -45,7 +48,6 @@ public class RefreshTokenCookiePreProcessorFilter implements Filter {
                 }
             }            
         }
-        
         chain.doFilter(requestLocal, response);
     }
     

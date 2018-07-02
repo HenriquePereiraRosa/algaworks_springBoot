@@ -35,7 +35,7 @@ public class PessoaService {
     }
 
     private Pessoa buscarPessoaPorId(Long id) {
-        Pessoa pessoa = pessoaRepository.findOne(id);
+        Pessoa pessoa = pessoaRepository.getOne(id);
         if(pessoa == null)
             throw new EmptyResultDataAccessException(1);
         return pessoa;

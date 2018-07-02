@@ -17,6 +17,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +51,7 @@ public class CategoriaResource {
     }
     
     // Save on db method
+    @CrossOrigin
     @PostMapping
     // Verify the user ROLE acess and appClient scopes 
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
@@ -63,13 +65,15 @@ public class CategoriaResource {
     }
     
     // SerchById
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> searchByNome( @PathVariable Long id ) {
-        Categoria categoria = categoriaRepository.findOne(id);
+        Categoria categoria = categoriaRepository.getOne(id);
         return ( categoria == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( categoria );
     }
     
     // SerchByName
+    @CrossOrigin
     @GetMapping("/searchbyname/{nome}")
     public ResponseEntity<Categoria> searchByNome( @PathVariable String nome ) {
         Categoria categoria = categoriaRepository.findByNomeContaining( nome );
@@ -77,13 +81,15 @@ public class CategoriaResource {
     }
     
     // Deletion By Id
+    @CrossOrigin
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
-        categoriaRepository.delete(id);
+        categoriaRepository.deleteById(id);
     }
     
     // Deletion By Name
+    @CrossOrigin
     @DeleteMapping("/deletebyname/{nome}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
@@ -92,9 +98,10 @@ public class CategoriaResource {
     }
     
     // Update a entire resourse and get it back to confirm
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody Categoria categoria){
-        Categoria categoriaSavedInDB = categoriaRepository.findOne(id);
+        Categoria categoriaSavedInDB = categoriaRepository.getOne(id);
         BeanUtils.copyProperties(categoria, categoriaSavedInDB, "id");
         categoriaRepository.save(categoriaSavedInDB);
         return ResponseEntity.ok(categoriaSavedInDB);        
