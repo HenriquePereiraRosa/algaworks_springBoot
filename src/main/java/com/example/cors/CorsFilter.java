@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.cors;
+/*package com.example.cors;
 
 import com.example.config.property.ApiProperty;
 import java.io.IOException;
@@ -25,9 +25,9 @@ import org.springframework.stereotype.Component;
  * @author user
  */
 
-@Component
-@Order(Ordered.HIGHEST_PRECEDENCE)
-public class CorsFilter implements Filter {
+//@Component
+//@Order(Ordered.HIGHEST_PRECEDENCE)
+/*public class CorsFilter implements Filter {
 
     @Autowired
     private ApiProperty apiProperty;
@@ -63,3 +63,4 @@ public class CorsFilter implements Filter {
     
     
 }
+*/

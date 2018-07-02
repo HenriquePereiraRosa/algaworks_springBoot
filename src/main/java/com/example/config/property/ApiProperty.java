@@ -1,6 +1,9 @@
 
 package com.example.config.property;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -13,20 +16,27 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties("app")
 public class ApiProperty {
     
-    private String allowedOrigin = "https://angular-intro.herokuapp.com";
+    private List<String> allowedOrigins;
     
     private final Security security = new Security();
+
+    public ApiProperty() {
+        this.allowedOrigins = new ArrayList<>(Arrays.asList(
+                "http://localhost:8000", "http://localhost:4200", 
+                "https://angular-intro.herokuapp.com",
+                "https://springBootIntro.herokuapp.com"));
+    }
 
     public Security getSecurity() {
         return security;
     }
 
-    public String getAllowedOrigin() {
-        return allowedOrigin;
+    public List<String> getAllowedOrigins() {
+        return allowedOrigins;
     }
 
-    public void setAllowedOrigin(String allowedOrigin) {
-        this.allowedOrigin = allowedOrigin;
+    public void setAllowedOrigin(String allowedOrigin, int index) {
+        this.allowedOrigins.set(index, allowedOrigin);
     }
     
     
