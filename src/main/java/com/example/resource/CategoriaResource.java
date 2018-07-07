@@ -33,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/categorias")
 public class CategoriaResource {
     
     @Autowired

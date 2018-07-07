@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 @RestController
-@RequestMapping("/pessoa")
+@RequestMapping("/pessoas")
 public class PessoaResource {
     
     @Autowired

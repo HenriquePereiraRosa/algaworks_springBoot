@@ -113,8 +113,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         String mensagemDesenvolvedor = ex.toString();
         List<ApiExceptionHandler.Erro> erros = Arrays.asList(new ApiExceptionHandler.Erro(mensagemUsuario, mensagemDesenvolvedor));
         return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
-    }
-    
+    }    
     
     public static class Erro {
             

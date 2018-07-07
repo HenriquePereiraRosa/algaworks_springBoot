@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-@RequestMapping("/personagem")
+@RequestMapping("/personagens")
 public class PersonagemResource {
     
     @Autowired

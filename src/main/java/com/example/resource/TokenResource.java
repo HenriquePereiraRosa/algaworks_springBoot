@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Profile("oauth")
 @RestController
-@RequestMapping("/tokens")
+@RequestMapping("/token")
 public class TokenResource {
     
     @Autowired

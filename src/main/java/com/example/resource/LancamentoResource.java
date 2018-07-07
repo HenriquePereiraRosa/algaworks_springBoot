@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 @RestController
-@RequestMapping("/lancamento")
+@RequestMapping("/lancamentos")
 public class LancamentoResource {
     
     @Autowired
