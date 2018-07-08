@@ -5,7 +5,7 @@
  */
 package com.example.repository.projection;
 
-import com.example.model.String;
+import com.example.model.TipoLancamento;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -16,15 +16,15 @@ import java.util.Date;
 public class ResumoLancamento {
     
     private Long id;
-    private String descricao;
+    private TipoLancamento descricao;
     private Date dataVencimento;
     private Date dataPagamento;
     private BigDecimal valor;
-    private String tipo;
-    private String categoria;
-    private String pessoa;
+    private TipoLancamento tipo;
+    private TipoLancamento categoria;
+    private TipoLancamento pessoa;
 
-    public ResumoLancamento(Long id, String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, String tipo, String categoria, String pessoa) {
+    public ResumoLancamento(Long id, TipoLancamento descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, TipoLancamento tipo, TipoLancamento categoria, TipoLancamento pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
@@ -43,11 +43,11 @@ public class ResumoLancamento {
         this.id = id;
     }
 
-    public String getDescricao() {
+    public TipoLancamento getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(TipoLancamento descricao) {
         this.descricao = descricao;
     }
 
@@ -75,27 +75,27 @@ public class ResumoLancamento {
         this.valor = valor;
     }
 
-    public String getTipo() {
+    public TipoLancamento getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(TipoLancamento tipo) {
         this.tipo = tipo;
     }
 
-    public String getCategoria() {
+    public TipoLancamento getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(TipoLancamento categoria) {
         this.categoria = categoria;
     }
 
-    public String getPessoa() {
+    public TipoLancamento getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(String pessoa) {
+    public void setPessoa(TipoLancamento pessoa) {
         this.pessoa = pessoa;
     }
     

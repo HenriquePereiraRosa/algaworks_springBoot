@@ -16,8 +16,8 @@
   "properties": [
     {
       "sourceType": "com.example.config.property.ApiProperty",
-      "name": "app.allowed-origins",
-      "type": "java.util.List<java.lang.String>"
+      "name": "app.allowed-origin",
+      "type": "java.lang.String"
     }
   ]
 }

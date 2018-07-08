@@ -36,7 +36,7 @@ public class Lancamento implements Serializable {
     private Long id;
 
     @NotNull
-    private String descricao;
+    private TipoLancamento descricao;
     
     // Necessary because of the diference between Table column name and object model atribute
     @NotNull
@@ -52,7 +52,7 @@ public class Lancamento implements Serializable {
     
     @NotNull
     @Enumerated(EnumType.STRING)
-    private String tipo;
+    private TipoLancamento tipo;
     
     @NotNull
     @ManyToOne
@@ -100,11 +100,11 @@ public class Lancamento implements Serializable {
     
     
 
-    public String getDescricao() {
+    public TipoLancamento getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
+    public void setDescricao(TipoLancamento descricao) {
         this.descricao = descricao;
     }
 
@@ -132,11 +132,11 @@ public class Lancamento implements Serializable {
         this.valor = valor;
     }
 
-    public String getTipo() {
+    public TipoLancamento getTipo() {
         return tipo;
     }
 
-    public void setTipoo(String tipo) {
+    public void setTipoo(TipoLancamento tipo) {
         this.tipo = tipo;
     }
 

@@ -29,7 +29,7 @@ public class Personagem {
     
     @NotNull
     @Size( min = 3, max = 20 )
-    private String nome;
+    private TipoLancamento nome;
 
     public Long getId() {
         return id;
@@ -39,11 +39,11 @@ public class Personagem {
         this.id = id;
     }
 
-    public String getNome() {
+    public TipoLancamento getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(TipoLancamento nome) {
         this.nome = nome;
     }
     

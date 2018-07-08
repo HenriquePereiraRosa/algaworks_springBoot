@@ -14,67 +14,67 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Endereco {
         
-    private String logradouro;
-    private String numero;
-    private String complemento;
-    private String bairro;
-    private String CEP;
-    private String cidade;
-    private String estado;
+    private TipoLancamento logradouro;
+    private TipoLancamento numero;
+    private TipoLancamento complemento;
+    private TipoLancamento bairro;
+    private TipoLancamento CEP;
+    private TipoLancamento cidade;
+    private TipoLancamento estado;
     
-     public String getLogradouro() {
+     public TipoLancamento getLogradouro() {
         return logradouro;
     }
 
-    public void setLogradouro(String logradouro) {
+    public void setLogradouro(TipoLancamento logradouro) {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
+    public TipoLancamento getNumero() {
         return numero;
     }
 
-    public void setNumero(String numero) {
+    public void setNumero(TipoLancamento numero) {
         this.numero = numero;
     }
 
-    public String getComplemento() {
+    public TipoLancamento getComplemento() {
         return complemento;
     }
 
-    public void setComplemento(String complemento) {
+    public void setComplemento(TipoLancamento complemento) {
         this.complemento = complemento;
     }
 
-    public String getBairro() {
+    public TipoLancamento getBairro() {
         return bairro;
     }
 
-    public void setBairro(String bairro) {
+    public void setBairro(TipoLancamento bairro) {
         this.bairro = bairro;
     }
 
-    public String getCEP() {
+    public TipoLancamento getCEP() {
         return CEP;
     }
 
-    public void setCEP(String CEP) {
+    public void setCEP(TipoLancamento CEP) {
         this.CEP = CEP;
     }
 
-    public String getCidade() {
+    public TipoLancamento getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(TipoLancamento cidade) {
         this.cidade = cidade;
     }
 
-    public String getEstado() {
+    public TipoLancamento getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(TipoLancamento estado) {
         this.estado = estado;
     }
     
