@@ -109,12 +109,12 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         query.setMaxResults(totalRegistrosPorPagina);
     }
     
-    private Long total(LancamentoFilter lancamentoFilter) {
+    private Long total(LancamentoFilter filter) {
        CriteriaBuilder builder = manager.getCriteriaBuilder();
        CriteriaQuery<Long> criteria = builder.createQuery(Long.class);
        Root<Lancamento> root = criteria.from(Lancamento.class);
        
-       Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
+       Predicate[] predicates = criateRestrictions(filter, builder, root);
        criteria.where(predicates);
        criteria.select(builder.count(root));
        

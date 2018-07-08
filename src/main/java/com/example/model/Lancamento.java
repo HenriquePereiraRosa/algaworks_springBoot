@@ -5,9 +5,8 @@
  */
 package com.example.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -29,14 +28,14 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "lancamento")
-public class Lancamento implements Serializable {
+public class Lancamento {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private TipoLancamento descricao;
+    private String descricao;
     
     // Necessary because of the diference between Table column name and object model atribute
     @NotNull
@@ -100,11 +99,11 @@ public class Lancamento implements Serializable {
     
     
 
-    public TipoLancamento getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(TipoLancamento descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 

@@ -29,7 +29,7 @@ public class Pessoa {
     private Long id;
 
     @NotNull
-    private TipoLancamento nome;
+    private String nome;
     
     @NotNull
     private boolean ativo;
@@ -46,11 +46,11 @@ public class Pessoa {
         this.id = id;
     }
 
-    public TipoLancamento getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(TipoLancamento nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
