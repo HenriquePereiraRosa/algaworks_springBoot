@@ -33,22 +33,9 @@ public class CorsConfig {
 //            authConfig.addAllowedOrigin(origin); 
 //
 //            // DEBUG
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("=================================");
 //            System.out.println("ORIGEM ADICIONDADA: " + origin);
-//            System.out.println("==================================");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
-//            System.out.println("");
 //        }
-         authConfig.addAllowedOrigin("*"); 
+        authConfig.addAllowedOrigin("*"); 
         authConfig.addAllowedHeader("Authorization");
         authConfig.addAllowedHeader("Content-Type");
         authConfig.addAllowedHeader("Accept");

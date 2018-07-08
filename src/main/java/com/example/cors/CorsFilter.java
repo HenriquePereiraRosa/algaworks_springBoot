@@ -46,8 +46,7 @@
 //        responseLocal.setHeader("Access-Control-Allow-Origin", apiProperty.getAllowedOrigin());
 //        responseLocal.setHeader("Access-Control-Allow-Credentials", "true");
 //        
-//        if("OPTIONS".equals(requestLocal.getMethod()) && 
-//                apiProperty.getAllowedOrigin().contains(requestLocal.getHeader("Origin"))) {
+//        if("OPTIONS".equals(requestLocal.getMethod())) {
 //            responseLocal.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
 //            responseLocal.setHeader("Access-Control-Max-Age", "3600");
 //            responseLocal.setStatus(HttpServletResponse.SC_OK);
@@ -60,6 +59,5 @@
 //    public void destroy() {
 //        //To change body of generated methods, choose Tools | Templates.
 //    }
-//    
 //    
 //}
