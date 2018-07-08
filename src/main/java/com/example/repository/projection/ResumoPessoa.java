@@ -5,10 +5,6 @@
  */
 package com.example.repository.projection;
 
-import com.example.model.TipoLancamento;
-import java.math.BigDecimal;
-import java.util.Date;
-
 /**
  *
  * @author user
@@ -16,12 +12,12 @@ import java.util.Date;
 public class ResumoPessoa {
     
     private Long id;
-    private TipoLancamento nome;
-    private TipoLancamento cidade;
-    private TipoLancamento estado;
+    private String nome;
+    private String cidade;
+    private String estado;
     private Boolean ativo;
 
-    public ResumoPessoa(Long id, TipoLancamento nome, TipoLancamento cidade, TipoLancamento estado, Boolean ativo) {
+    public ResumoPessoa(Long id, String nome, String cidade, String estado, Boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.cidade = cidade;
@@ -37,27 +33,27 @@ public class ResumoPessoa {
         this.id = id;
     }
 
-    public TipoLancamento getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(TipoLancamento nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
 
-    public TipoLancamento getCidade() {
+    public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(TipoLancamento cidade) {
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
 
-    public TipoLancamento getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(TipoLancamento estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 

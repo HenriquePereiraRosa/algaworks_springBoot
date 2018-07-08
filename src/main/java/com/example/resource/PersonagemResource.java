@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author User
  */
 
-@CrossOrigin
 @RestController
 @RequestMapping("/personagens")
 public class PersonagemResource {
@@ -39,11 +38,13 @@ public class PersonagemResource {
     private ApplicationEventPublisher publisher;
     
     @GetMapping
+    @CrossOrigin
     public List<Personagem> listar() {
         return personagemRepository.findAll();
     }
     
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<Personagem> saveOnDb( @Valid @RequestBody Personagem personagem, HttpServletResponse response){
         Personagem objectSaved = personagemRepository.save( personagem );
         
@@ -54,6 +55,7 @@ public class PersonagemResource {
     
     //SerchById
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Personagem> searchByCode( @PathVariable Long id ) {
         Personagem personagem = personagemRepository.getOne(id);
         return ( personagem == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( personagem );
@@ -61,6 +63,7 @@ public class PersonagemResource {
     
     // SerchByName
     @GetMapping("/searchbyname/{nome}")
+    @CrossOrigin
     public ResponseEntity<? extends Object> searchByNome( @PathVariable String nome ) {
         Personagem personagem = personagemRepository.findByNome( nome );
         return ( personagem == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( personagem );

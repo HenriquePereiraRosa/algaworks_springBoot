@@ -8,9 +8,7 @@ package com.example.repository.pessoa;
 import com.example.model.Pessoa;
 import com.example.repository.filter.PessoaFilter;
 import com.example.repository.projection.ResumoPessoa;
-//import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;

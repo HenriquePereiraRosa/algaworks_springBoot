@@ -10,7 +10,6 @@ import com.example.model.Pessoa;
 import com.example.repository.PessoaRepository;
 import com.example.repository.filter.PessoaFilter;
 import com.example.service.PessoaService;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -37,7 +36,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 
-@CrossOrigin
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaResource {
@@ -54,6 +52,7 @@ public class PessoaResource {
     
     // Get Page of pessoas method
     @GetMapping
+    @CrossOrigin
     public Page<Pessoa> search(PessoaFilter filter, Pageable pageable) {
         return pessoaRepository.search(filter, pageable);
     } 
@@ -61,6 +60,7 @@ public class PessoaResource {
     
     // Save on db method
     @PostMapping
+    @CrossOrigin
     public ResponseEntity<Pessoa> saveOnDb( @Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
         Pessoa objectSaved = pessoaRepository.save( pessoa );
         
@@ -71,6 +71,7 @@ public class PessoaResource {
     
     // SerchById
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Pessoa> searchByNome( @PathVariable Long id ) {
         Pessoa pessoa = pessoaRepository.getOne(id);
         return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
@@ -78,6 +79,7 @@ public class PessoaResource {
     
     // SerchByName
     @GetMapping("/searchbyname/{nome}")
+    @CrossOrigin
     public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
         Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
         return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
@@ -85,6 +87,7 @@ public class PessoaResource {
     
     // Deletion By Id
     @DeleteMapping("/{id}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
         pessoaRepository.deleteById(id);
@@ -92,6 +95,7 @@ public class PessoaResource {
     
     // Deletion By Name
     @DeleteMapping("/deletebyname/{nome}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
         Pessoa pessoa = pessoaRepository.findByNome(nome);
@@ -100,6 +104,7 @@ public class PessoaResource {
     
     // Update a entire resourse and get it back to confirm
     @PutMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Pessoa> update(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
         Pessoa pessoaInDB = pessoaRepository.getOne(id);
         BeanUtils.copyProperties(pessoa, pessoaInDB, "id");
@@ -109,6 +114,7 @@ public class PessoaResource {
     
     // Update partially ativo property
     @PutMapping("/{id}/ativo")
+    @CrossOrigin
     public ResponseEntity<Pessoa> updatePartiallyAtivo(@PathVariable Long id, @RequestBody Boolean ativo){
         pessoaService.atualizarPropriedadeAtivo(id, ativo);
         Pessoa pessoaInDB = pessoaRepository.getOne(id);
@@ -117,6 +123,7 @@ public class PessoaResource {
 
     // Update partially a resource. ToDo: Not working!!!
     @PatchMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Pessoa> updatePartially(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
         Pessoa pessoaInDB = pessoaService.atualizar(id, pessoa);
         return ResponseEntity.ok(pessoaInDB);        

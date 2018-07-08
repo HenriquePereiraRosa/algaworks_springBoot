@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author user
  */
-@CrossOrigin
+
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
@@ -44,12 +44,14 @@ public class CategoriaResource {
     private ApplicationEventPublisher publisher;
     
     @GetMapping
+    @CrossOrigin
     public List<Categoria> listar(){
         return categoriaRepository.findAll();
     }
     
     // Save on db method
     @PostMapping
+    @CrossOrigin
     // Verify the user ROLE acess and appClient scopes 
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
     public ResponseEntity<Categoria> saveOnDb( @Valid @RequestBody Categoria categoria, HttpServletResponse response){
@@ -63,6 +65,7 @@ public class CategoriaResource {
     
     // SerchById
     @GetMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Categoria> searchByNome( @PathVariable Long id ) {
         Categoria categoria = categoriaRepository.getOne(id);
         return ( categoria == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( categoria );
@@ -70,6 +73,7 @@ public class CategoriaResource {
     
     // SerchByName
     @GetMapping("/searchbyname/{nome}")
+    @CrossOrigin
     public ResponseEntity<Categoria> searchByNome( @PathVariable String nome ) {
         Categoria categoria = categoriaRepository.findByNomeContaining( nome );
         return ( categoria == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( categoria );
@@ -77,6 +81,7 @@ public class CategoriaResource {
     
     // Deletion By Id
     @DeleteMapping("/{id}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
         categoriaRepository.deleteById(id);
@@ -84,6 +89,7 @@ public class CategoriaResource {
     
     // Deletion By Name
     @DeleteMapping("/deletebyname/{nome}")
+    @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
         Categoria pessoa = categoriaRepository.findByNome(nome);
@@ -92,6 +98,7 @@ public class CategoriaResource {
     
     // Update a entire resourse and get it back to confirm
     @PutMapping("/{id}")
+    @CrossOrigin
     public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody Categoria categoria){
         Categoria categoriaSavedInDB = categoriaRepository.getOne(id);
         BeanUtils.copyProperties(categoria, categoriaSavedInDB, "id");

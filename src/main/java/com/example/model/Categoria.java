@@ -23,7 +23,7 @@ public class Categoria {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
         
-    private TipoLancamento nome;
+    private String nome;
 
     public Long getId() {
         return id;
@@ -33,11 +33,11 @@ public class Categoria {
         this.id = id;
     }
     
-    public TipoLancamento getNome() {
+    public String getNome() {
         return nome;
     }
 
-    public void setNome(TipoLancamento nome) {
+    public void setNome(String nome) {
         this.nome = nome;
     }
     

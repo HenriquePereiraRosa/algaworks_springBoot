@@ -16,15 +16,15 @@ import java.util.Date;
 public class ResumoLancamento {
     
     private Long id;
-    private TipoLancamento descricao;
+    private String descricao;
     private Date dataVencimento;
     private Date dataPagamento;
     private BigDecimal valor;
     private TipoLancamento tipo;
-    private TipoLancamento categoria;
-    private TipoLancamento pessoa;
+    private String categoria;
+    private String pessoa;
 
-    public ResumoLancamento(Long id, TipoLancamento descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, TipoLancamento tipo, TipoLancamento categoria, TipoLancamento pessoa) {
+    public ResumoLancamento(Long id, String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
@@ -43,11 +43,11 @@ public class ResumoLancamento {
         this.id = id;
     }
 
-    public TipoLancamento getDescricao() {
+    public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(TipoLancamento descricao) {
+    public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
@@ -83,19 +83,19 @@ public class ResumoLancamento {
         this.tipo = tipo;
     }
 
-    public TipoLancamento getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(TipoLancamento categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    public TipoLancamento getPessoa() {
+    public String getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(TipoLancamento pessoa) {
+    public void setPessoa(String pessoa) {
         this.pessoa = pessoa;
     }
     
