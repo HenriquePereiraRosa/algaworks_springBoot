@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  */
 
+@CrossOrigin
 @Profile("oauth")
 @RestController
 @RequestMapping("/token")
@@ -30,7 +31,6 @@ public class TokenResource {
     @Autowired
     private ApiProperty apiProperty;
     
-    @CrossOrigin
     @DeleteMapping
     public void revoke(HttpServletRequest request, HttpServletResponse response) {
         Cookie cookie = new Cookie("refreshToken", null);

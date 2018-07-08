@@ -32,16 +32,14 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author user
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/categorias")
 public class CategoriaResource {
     
     @Autowired
     private CategoriaRepository categoriaRepository;
-    
-//    @Autowired
-//    private CategoriaService categoriaService; ToDo
-    
+        
     @Autowired
     private ApplicationEventPublisher publisher;
     
@@ -51,7 +49,6 @@ public class CategoriaResource {
     }
     
     // Save on db method
-    @CrossOrigin
     @PostMapping
     // Verify the user ROLE acess and appClient scopes 
     @PreAuthorize("hasAuthority('ROLE_CADASTRAR_CATEGORIA') and #oauth2.hasScope('write')")
@@ -65,7 +62,6 @@ public class CategoriaResource {
     }
     
     // SerchById
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Categoria> searchByNome( @PathVariable Long id ) {
         Categoria categoria = categoriaRepository.getOne(id);
@@ -73,7 +69,6 @@ public class CategoriaResource {
     }
     
     // SerchByName
-    @CrossOrigin
     @GetMapping("/searchbyname/{nome}")
     public ResponseEntity<Categoria> searchByNome( @PathVariable String nome ) {
         Categoria categoria = categoriaRepository.findByNomeContaining( nome );
@@ -81,7 +76,6 @@ public class CategoriaResource {
     }
     
     // Deletion By Id
-    @CrossOrigin
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
@@ -89,7 +83,6 @@ public class CategoriaResource {
     }
     
     // Deletion By Name
-    @CrossOrigin
     @DeleteMapping("/deletebyname/{nome}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
@@ -98,7 +91,6 @@ public class CategoriaResource {
     }
     
     // Update a entire resourse and get it back to confirm
-    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Categoria> update(@PathVariable Long id, @Valid @RequestBody Categoria categoria){
         Categoria categoriaSavedInDB = categoriaRepository.getOne(id);

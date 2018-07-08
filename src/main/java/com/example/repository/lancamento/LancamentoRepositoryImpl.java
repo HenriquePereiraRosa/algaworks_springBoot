@@ -35,27 +35,27 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
     private EntityManager manager;
     
     @Override
-    public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable) {
+    public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable) {
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<Lancamento> criteria = builder.createQuery(Lancamento.class);
         Root<Lancamento> root = criteria.from(Lancamento.class);
-        
-        // criate the restrictions
-        Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
+
+        Predicate[] predicates = criateRestrictions(filter, builder, root);
         criteria.where(predicates);
-        
+
         TypedQuery<Lancamento> query = manager.createQuery(criteria);
         adicionarRestricoesDePagina(query, pageable);
-        return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
+
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
+    
     
     @Override
     public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable) {
-        
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
         Root<Lancamento> root = criteria.from(Lancamento.class);
-        
+
         criteria.select(builder.construct(ResumoLancamento.class, 
             root.get("id"),
             root.get("descricao"),
@@ -66,10 +66,9 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
             root.get("categoria").get("nome"),
             root.get("pessoa").get("nome")));
 
-        // criate the restrictions
         Predicate[] predicates = criateRestrictions(filter, builder, root);
         criteria.where(predicates);
-        
+
         TypedQuery<ResumoLancamento> query = manager.createQuery(criteria);
         adicionarRestricoesDePagina(query, pageable);
         return new PageImpl<>(query.getResultList(), pageable, total(filter));
