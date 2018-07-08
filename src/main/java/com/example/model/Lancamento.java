@@ -49,6 +49,8 @@ public class Lancamento {
     @NotNull
     private BigDecimal valor;
     
+    private String observacao;
+    
     @NotNull
     @Enumerated(EnumType.STRING)
     private TipoLancamento tipo;
@@ -71,33 +73,6 @@ public class Lancamento {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Lancamento other = (Lancamento) obj;
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        return true;
-    }
-    
-    
 
     public String getDescricao() {
         return descricao;
@@ -131,6 +106,16 @@ public class Lancamento {
         this.valor = valor;
     }
 
+    public String getObservacao() {
+        return observacao;
+    }
+
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
+    }
+
+    
+    
     public TipoLancamento getTipo() {
         return tipo;
     }
@@ -154,6 +139,30 @@ public class Lancamento {
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
     }
-
     
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + Objects.hashCode(this.id);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Lancamento other = (Lancamento) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+        
 }

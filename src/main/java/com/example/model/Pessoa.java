@@ -30,14 +30,14 @@ public class Pessoa {
 
     @NotNull
     private String nome;
+        
+    @Embedded
+    private Endereco endereco;
     
     @NotNull
     private boolean ativo;
     
-    @Embedded
-    private Endereco endereco;
-
-        
+    
     public Long getId() {
         return id;
     }
@@ -54,14 +54,6 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    public boolean isAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
-
     public Endereco getEndereco() {
         return endereco;
     }
@@ -70,6 +62,14 @@ public class Pessoa {
         this.endereco = endereco;
     }
     
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
     @JsonIgnore
     @Transient
     public boolean isInativo() {
