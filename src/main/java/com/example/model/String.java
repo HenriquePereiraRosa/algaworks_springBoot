@@ -10,7 +10,7 @@ package com.example.model;
  * @author user
  */
 
-public enum TipoLancamento {
+public enum String {
     RECEITA,
     DESPESA
 }

@@ -5,7 +5,7 @@
  */
 package com.example.repository.projection;
 
-import com.example.model.TipoLancamento;
+import com.example.model.String;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -20,11 +20,11 @@ public class ResumoLancamento {
     private Date dataVencimento;
     private Date dataPagamento;
     private BigDecimal valor;
-    private TipoLancamento tipo;
+    private String tipo;
     private String categoria;
     private String pessoa;
 
-    public ResumoLancamento(Long id, String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
+    public ResumoLancamento(Long id, String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, String tipo, String categoria, String pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
@@ -35,12 +35,12 @@ public class ResumoLancamento {
         this.pessoa = pessoa;
     }
 
-    public Long getCodigo() {
+    public Long getId() {
         return id;
     }
 
-    public void setCodigo(Long codigo) {
-        this.id = codigo;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDescricao() {
@@ -75,11 +75,11 @@ public class ResumoLancamento {
         this.valor = valor;
     }
 
-    public TipoLancamento getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoLancamento tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 

@@ -52,7 +52,7 @@ public class Lancamento implements Serializable {
     
     @NotNull
     @Enumerated(EnumType.STRING)
-    private TipoLancamento tipo;
+    private String tipo;
     
     @NotNull
     @ManyToOne
@@ -132,11 +132,11 @@ public class Lancamento implements Serializable {
         this.valor = valor;
     }
 
-    public TipoLancamento getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipoo(TipoLancamento tipo) {
+    public void setTipoo(String tipo) {
         this.tipo = tipo;
     }
 

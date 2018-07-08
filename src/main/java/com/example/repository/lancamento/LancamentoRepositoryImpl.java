@@ -5,6 +5,7 @@
  */
 package com.example.repository.lancamento;
 
+import com.example.repository.lancamento.LancamentoRepositoryQuery;
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
@@ -49,7 +50,7 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
     }
     
     @Override
-    public Page<ResumoLancamento> resume(LancamentoFilter lancamentoFilter, Pageable pageable) {
+    public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable) {
         
         CriteriaBuilder builder = manager.getCriteriaBuilder();
         CriteriaQuery<ResumoLancamento> criteria = builder.createQuery(ResumoLancamento.class);
@@ -66,12 +67,12 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
             root.get("pessoa").get("nome")));
 
         // criate the restrictions
-        Predicate[] predicates = criateRestrictions(lancamentoFilter, builder, root);
+        Predicate[] predicates = criateRestrictions(filter, builder, root);
         criteria.where(predicates);
         
         TypedQuery<ResumoLancamento> query = manager.createQuery(criteria);
         adicionarRestricoesDePagina(query, pageable);
-        return new PageImpl<>(query.getResultList(), pageable, total(lancamentoFilter));
+        return new PageImpl<>(query.getResultList(), pageable, total(filter));
     }
 
     private Predicate[] criateRestrictions(LancamentoFilter lancamentoFilter,

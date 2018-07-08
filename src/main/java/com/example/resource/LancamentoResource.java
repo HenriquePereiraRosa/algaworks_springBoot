@@ -33,6 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author user
  */
+        
+@CrossOrigin
 @RestController
 @RequestMapping("/lancamentos")
 public class LancamentoResource {
@@ -45,21 +47,18 @@ public class LancamentoResource {
     
     @Autowired
     private ApplicationEventPublisher publisher;
-            
-    @CrossOrigin
+    
     @GetMapping
-    public Page<Lancamento> search(LancamentoFilter lancamentoFilter, Pageable pageable) {
-        return lancamentoRepository.search(lancamentoFilter, pageable);
+    public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable) {
+        return lancamentoRepository.search(filter, pageable);
     } 
     
-    @CrossOrigin
     @GetMapping(params = "resumo") // If there is an param called "resumo" in the requisition, then call this method.
-    public Page<ResumoLancamento> resume(LancamentoFilter lancamentoFilter, Pageable pageable) {
-        return lancamentoRepository.resume(lancamentoFilter, pageable);
+    public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable) {
+        return lancamentoRepository.resume(filter, pageable);
     }
     
     // Save on db method
-    @CrossOrigin
     @PostMapping
     public ResponseEntity<Lancamento> saveOnDb( @Valid @RequestBody Lancamento lancamento, HttpServletResponse response){
         Lancamento objectSaved = lancamentoRepository.save(lancamento);
@@ -70,7 +69,6 @@ public class LancamentoResource {
     }
     
     // SerchById
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<? extends Object> searchById( @PathVariable Long id ) {
         Lancamento lancamento = lancamentoRepository.getOne(id);
@@ -79,7 +77,6 @@ public class LancamentoResource {
     
     
      // Deletion By Name
-    @CrossOrigin
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){

@@ -8,6 +8,7 @@ package com.example.resource;
 import com.example.event.RecursoCriadoEvent;
 import com.example.model.Pessoa;
 import com.example.repository.PessoaRepository;
+import com.example.repository.filter.PessoaFilter;
 import com.example.service.PessoaService;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -33,6 +36,8 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author user
  */
+
+@CrossOrigin
 @RestController
 @RequestMapping("/pessoas")
 public class PessoaResource {
@@ -46,14 +51,15 @@ public class PessoaResource {
     @Autowired
     private ApplicationEventPublisher publisher;
     
-    @CrossOrigin
+    
+    // Get Page of pessoas method
     @GetMapping
-    public List<Pessoa> listar(){
-        return pessoaRepository.findAll();
-    }
+    public Page<Pessoa> search(PessoaFilter filter, Pageable pageable) {
+        return pessoaRepository.search(filter, pageable);
+    } 
+    
     
     // Save on db method
-    @CrossOrigin
     @PostMapping
     public ResponseEntity<Pessoa> saveOnDb( @Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
         Pessoa objectSaved = pessoaRepository.save( pessoa );
@@ -64,7 +70,6 @@ public class PessoaResource {
     }
     
     // SerchById
-    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Pessoa> searchByNome( @PathVariable Long id ) {
         Pessoa pessoa = pessoaRepository.getOne(id);
@@ -72,7 +77,6 @@ public class PessoaResource {
     }
     
     // SerchByName
-    @CrossOrigin
     @GetMapping("/searchbyname/{nome}")
     public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
         Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
@@ -80,7 +84,6 @@ public class PessoaResource {
     }
     
     // Deletion By Id
-    @CrossOrigin
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
@@ -88,7 +91,6 @@ public class PessoaResource {
     }
     
     // Deletion By Name
-    @CrossOrigin
     @DeleteMapping("/deletebyname/{nome}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable String nome){
@@ -97,7 +99,6 @@ public class PessoaResource {
     }
     
     // Update a entire resourse and get it back to confirm
-    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Pessoa> update(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
         Pessoa pessoaInDB = pessoaRepository.getOne(id);
@@ -107,7 +108,6 @@ public class PessoaResource {
     }
     
     // Update partially ativo property
-    @CrossOrigin
     @PutMapping("/{id}/ativo")
     public ResponseEntity<Pessoa> updatePartiallyAtivo(@PathVariable Long id, @RequestBody Boolean ativo){
         pessoaService.atualizarPropriedadeAtivo(id, ativo);
@@ -116,7 +116,6 @@ public class PessoaResource {
     }
 
     // Update partially a resource. ToDo: Not working!!!
-    @CrossOrigin
     @PatchMapping("/{id}")
     public ResponseEntity<Pessoa> updatePartially(@PathVariable Long id, @Valid @RequestBody Pessoa pessoa){
         Pessoa pessoaInDB = pessoaService.atualizar(id, pessoa);

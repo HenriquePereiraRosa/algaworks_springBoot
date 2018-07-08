@@ -6,12 +6,13 @@
 package com.example.repository;
 
 import com.example.model.Pessoa;
+import com.example.repository.pessoa.PessoaRepositoryQuery;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *
  * @author user
  */
-public interface PessoaRepository extends JpaRepository< Pessoa, Long > {
+public interface PessoaRepository extends JpaRepository< Pessoa, Long >, PessoaRepositoryQuery {
     
     Pessoa findByNome(String nome);
     
