@@ -117,8 +117,7 @@
                 <artifactId>spring-boot-configuration-processor</artifactId>
                 <optional>true</optional>
         </dependency>
-        
-                
+                        
         <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
         <dependency>
             <groupId>org.hibernate</groupId>
