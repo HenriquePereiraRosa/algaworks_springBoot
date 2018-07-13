@@ -34,10 +34,10 @@ INSERT INTO estado (id, nome) VALUES(27, 'Tocantins');
 
 
 CREATE TABLE cidade (
-	id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
-	nome VARCHAR(50) NOT NULL,
-  id_estado BIGINT(20) NOT NULL,
-  FOREIGN KEY (id_estado) REFERENCES estado(id)
+    id BIGINT(20) PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    id_estado BIGINT(20) NOT NULL,
+    FOREIGN KEY (id_estado) REFERENCES estado(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO cidade (id, nome, id_estado) VALUES (1, 'Belo Horizonte', 11);

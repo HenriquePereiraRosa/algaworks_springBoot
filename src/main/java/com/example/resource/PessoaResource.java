@@ -10,6 +10,7 @@ import com.example.model.Pessoa;
 import com.example.repository.PessoaRepository;
 import com.example.repository.filter.PessoaFilter;
 import com.example.service.PessoaService;
+import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.BeanUtils;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,15 +59,21 @@ public class PessoaResource {
         return pessoaRepository.search(filter, pageable);
     } 
     
+    @GetMapping("/{codigo}")
+    @CrossOrigin
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
+    public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
+        Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
+        return pessoa.isPresent() ? ResponseEntity.ok(pessoa.get()) : ResponseEntity.notFound().build();
+    }
+    
     
     // Save on db method
     @PostMapping
     @CrossOrigin
     public ResponseEntity<Pessoa> saveOnDb( @Valid @RequestBody Pessoa pessoa, HttpServletResponse response){
-        Pessoa objectSaved = pessoaRepository.save( pessoa );
-        
-        publisher.publishEvent( new RecursoCriadoEvent( this, response, objectSaved.getId())); // Create an event when an object is saved
-        
+        Pessoa objectSaved = pessoaRepository.save( pessoa );        
+        publisher.publishEvent( new RecursoCriadoEvent( this, response, objectSaved.getId())); // Create an event when an object is saved        
         return ResponseEntity.status(HttpStatus.CREATED).body( objectSaved );
     }
     
