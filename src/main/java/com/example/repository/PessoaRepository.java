@@ -6,20 +6,23 @@
 package com.example.repository;
 
 import com.example.model.Pessoa;
-import com.example.repository.pessoa.PessoaRepositoryQuery;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 /**
  *
  * @author user
  */
-public interface PessoaRepository extends JpaRepository< Pessoa, Long >, PessoaRepositoryQuery {
+public interface PessoaRepository extends JpaRepository<Pessoa, Long> {
     
-    Pessoa findByNome(String nome);
+    public Pessoa findByNome(String nome);
     
-    Pessoa findByNomeContaining(String nome);
+    public Pessoa findByNomeContaining(String nome);
     
-    Pessoa findByAtivo(boolean ativo);
+    public Page<Pessoa> findByNomeContaining(String nome, Pageable pageable);
     
-    Pessoa findByEndereco(String endereco);
+    public Pessoa findByAtivo(boolean ativo);
+    
+    public Pessoa findByEndereco(String endereco);
   
 }

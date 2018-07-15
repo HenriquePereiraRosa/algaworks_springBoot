@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -37,8 +38,8 @@ public class CidadeResource {
     
     @GetMapping
     @CrossOrigin
-    public List<Cidade> search( ) {
-        return cidadeRepository.findAll();
+    public List<Cidade> search(@RequestParam Long estado) {
+        return cidadeRepository.findByEstadoId(estado);
     } 
     
     // SerchById

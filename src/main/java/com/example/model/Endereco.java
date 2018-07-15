@@ -5,22 +5,27 @@
  */
 package com.example.model;
 
+import java.io.Serializable;
 import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  *
  * @author user
  */
 @Embeddable
-public class Endereco {
+public class Endereco implements Serializable {
         
     private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
     private String CEP;
+    
+    @ManyToOne(targetEntity = Cidade.class)
+    @JoinColumn(name = "id_cidade")
     private String cidade;
-    private String estado;
     
      public String getLogradouro() {
         return logradouro;
@@ -69,13 +74,4 @@ public class Endereco {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    
 }

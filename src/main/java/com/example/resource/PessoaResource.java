@@ -8,7 +8,6 @@ package com.example.resource;
 import com.example.event.RecursoCriadoEvent;
 import com.example.model.Pessoa;
 import com.example.repository.PessoaRepository;
-import com.example.repository.filter.PessoaFilter;
 import com.example.service.PessoaService;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +29,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,16 +55,26 @@ public class PessoaResource {
     // Get Page of pessoas method
     @GetMapping
     @CrossOrigin
-    public Page<Pessoa> search(PessoaFilter filter, Pageable pageable) {
-        return pessoaRepository.search(filter, pageable);
+    @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA')")
+    public Page<Pessoa> search(@RequestParam(required = false, defaultValue = "%") String nome, Pageable pageable) {
+        return pessoaRepository.findByNomeContaining(nome, pageable);
     } 
     
-    @GetMapping("/{codigo}")
+    // SerchById
+    @GetMapping("/{id}")
     @CrossOrigin
     @PreAuthorize("hasAuthority('ROLE_PESQUISAR_PESSOA') and #oauth2.hasScope('read')")
-    public ResponseEntity<Pessoa> buscarPeloCodigo(@PathVariable Long codigo) {
-        Optional<Pessoa> pessoa = pessoaRepository.findById(codigo);
+    public ResponseEntity<Pessoa> findById(@PathVariable Long id) {
+        Optional<Pessoa> pessoa = pessoaRepository.findById(id);
         return pessoa.isPresent() ? ResponseEntity.ok(pessoa.get()) : ResponseEntity.notFound().build();
+    }
+        
+    // SerchByName
+    @GetMapping("/searchbyname/{nome}")
+    @CrossOrigin
+    public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
+        Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
+        return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
     }
     
     
@@ -75,22 +85,6 @@ public class PessoaResource {
         Pessoa objectSaved = pessoaRepository.save( pessoa );        
         publisher.publishEvent( new RecursoCriadoEvent( this, response, objectSaved.getId())); // Create an event when an object is saved        
         return ResponseEntity.status(HttpStatus.CREATED).body( objectSaved );
-    }
-    
-    // SerchById
-    @GetMapping("/{id}")
-    @CrossOrigin
-    public ResponseEntity<Pessoa> searchByNome( @PathVariable Long id ) {
-        Pessoa pessoa = pessoaRepository.getOne(id);
-        return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
-    }
-    
-    // SerchByName
-    @GetMapping("/searchbyname/{nome}")
-    @CrossOrigin
-    public ResponseEntity<Pessoa> searchByNome( @PathVariable String nome ) {
-        Pessoa pessoa = pessoaRepository.findByNomeContaining( nome );
-        return ( pessoa == null )? ResponseEntity.notFound().build() : ResponseEntity.ok( pessoa );
     }
     
     // Deletion By Id
