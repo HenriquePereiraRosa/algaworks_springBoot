@@ -7,7 +7,7 @@ package com.example.repository.projection;
 
 import com.example.model.TipoLancamento;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -17,14 +17,14 @@ public class ResumoLancamento {
     
     private Long id;
     private String descricao;
-    private Date dataVencimento;
-    private Date dataPagamento;
+    private LocalDate dataVencimento;
+    private LocalDate dataPagamento;
     private BigDecimal valor;
     private TipoLancamento tipo;
     private String categoria;
     private String pessoa;
 
-    public ResumoLancamento(Long id, String descricao, Date dataVencimento, Date dataPagamento, BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
+    public ResumoLancamento(Long id, String descricao, LocalDate dataVencimento, LocalDate dataPagamento, BigDecimal valor, TipoLancamento tipo, String categoria, String pessoa) {
         this.id = id;
         this.descricao = descricao;
         this.dataVencimento = dataVencimento;
@@ -51,19 +51,19 @@ public class ResumoLancamento {
         this.descricao = descricao;
     }
 
-    public Date getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 
