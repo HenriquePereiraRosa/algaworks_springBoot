@@ -119,8 +119,7 @@ public class PessoaResource {
     @CrossOrigin
     public ResponseEntity<Pessoa> updatePartiallyAtivo(@PathVariable Long id, @RequestBody Boolean ativo){
         pessoaService.atualizarPropriedadeAtivo(id, ativo);
-        Pessoa pessoaInDB = pessoaRepository.getOne(id);
-        return ResponseEntity.ok(pessoaInDB);
+        return ResponseEntity.ok(pessoaRepository.getOne(id));
     }
 
     // Update partially a resource. ToDo: Not working!!!

@@ -15,6 +15,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface CidadeRepository extends JpaRepository<Cidade, Long> {
     
-    List<Cidade> findByEstadoId(Long id);
+    public List<Cidade> findByEstadoId(Long id);
     
 }

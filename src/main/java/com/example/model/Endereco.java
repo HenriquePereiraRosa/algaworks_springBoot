@@ -5,7 +5,6 @@
  */
 package com.example.model;
 
-import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -15,17 +14,17 @@ import javax.persistence.ManyToOne;
  * @author user
  */
 @Embeddable
-public class Endereco implements Serializable {
-        
+public class Endereco {
+    
     private String logradouro;
     private String numero;
     private String complemento;
     private String bairro;
     private String CEP;
     
-    @ManyToOne(targetEntity = Cidade.class)
+    @ManyToOne
     @JoinColumn(name = "id_cidade")
-    private String cidade;
+    private Cidade cidade;
     
      public String getLogradouro() {
         return logradouro;
@@ -67,11 +66,11 @@ public class Endereco implements Serializable {
         this.CEP = CEP;
     }
 
-    public String getCidade() {
+    public Cidade getCidade() {
         return cidade;
     }
 
-    public void setCidade(String cidade) {
+    public void setCidade(Cidade cidade) {
         this.cidade = cidade;
     }
 }

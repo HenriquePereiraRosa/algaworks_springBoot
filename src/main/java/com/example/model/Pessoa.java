@@ -6,15 +6,19 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -24,7 +28,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pessoa")
-public class Pessoa implements Serializable {
+public class Pessoa {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

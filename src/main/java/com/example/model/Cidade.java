@@ -5,7 +5,6 @@
  */
 package com.example.model;
 
-import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -20,7 +19,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cidade")
-public class Cidade implements Serializable {
+public class Cidade {
     
     @Id
     private Long id;
@@ -48,7 +47,7 @@ public class Cidade implements Serializable {
         this.nome = nome;
     }
 
-    public Estado estado() {
+    public Estado getEstado() {
         return estado;
     }
 

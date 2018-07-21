@@ -15,6 +15,6 @@ import com.example.repository.lancamento.LancamentoRepositoryQuery;
  */
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long>, LancamentoRepositoryQuery {
     
-    Lancamento getOne(Long id);
+    public Lancamento getOne(Long id);
     
 }

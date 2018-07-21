@@ -18,6 +18,12 @@
       "sourceType": "com.example.config.property.ApiProperty",
       "name": "app.allowed-origin",
       "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.example.config.property.ApiProperty$Security",
+      "defaultValue": false,
+      "name": "app.security.enable-https",
+      "type": "java.lang.Boolean"
     }
   ]
 }
