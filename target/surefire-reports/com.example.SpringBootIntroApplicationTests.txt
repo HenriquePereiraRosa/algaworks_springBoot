@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.example.SpringBootIntroApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 30.203 s - in com.example.SpringBootIntroApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 29.033 s - in com.example.SpringBootIntroApplicationTests

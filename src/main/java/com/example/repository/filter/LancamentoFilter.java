@@ -6,7 +6,7 @@
 package com.example.repository.filter;
 
 //import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -18,10 +18,10 @@ public class LancamentoFilter {
     private String descricao;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private Date dataVencimentoDe;
+    private LocalDate dataVencimentoDe;
     
     @DateTimeFormat(pattern = "yyy-MM-dd")
-    private Date dataVencimentoAte;
+    private LocalDate dataVencimentoAte;
 
     public String getDescricao() {
         return descricao;
@@ -31,19 +31,19 @@ public class LancamentoFilter {
         this.descricao = descricao;
     }
 
-    public Date getDataVencimentoDe() {
+    public LocalDate getDataVencimentoDe() {
         return dataVencimentoDe;
     }
 
-    public void setDataVencimentoDe(Date dataVencimentoDe) {
+    public void setDataVencimentoDe(LocalDate dataVencimentoDe) {
         this.dataVencimentoDe = dataVencimentoDe;
     }
 
-    public Date getDataVencimentoAte() {
+    public LocalDate getDataVencimentoAte() {
         return dataVencimentoAte;
     }
 
-    public void setDataVencimentoAte(Date dataVencimentoAte) {
+    public void setDataVencimentoAte(LocalDate dataVencimentoAte) {
         this.dataVencimentoAte = dataVencimentoAte;
     }
     

@@ -11,9 +11,7 @@ import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
 import java.time.LocalDate;
-//import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -45,9 +43,9 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
                 builder.createQuery(LancamentoEstatisticaCategoria.class);
         Root<Lancamento> root = query.from(Lancamento.class);
         query.select(builder.construct(LancamentoEstatisticaCategoria.class, 
-                root.get("categoria").get("nome"),
+                root.get("categoria"),
                 builder.sum(root.get("valor"))));
-        LocalDate firstDay = mes.withDayOfMonth(0);
+        LocalDate firstDay = mes.withDayOfMonth(1);
         LocalDate lastDay = mes.withDayOfMonth(mes.lengthOfMonth());
         
         query.where(
@@ -115,13 +113,13 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         
         if(lancamentoFilter.getDataVencimentoDe() != null){
             predicates.add(builder.greaterThanOrEqualTo(
-                    root.<Date>get("dataVencimento"),
+                    root.<LocalDate>get("dataVencimento"),
                     lancamentoFilter.getDataVencimentoDe()));
         }
         
         if(lancamentoFilter.getDataVencimentoAte() != null){
             predicates.add(builder.lessThanOrEqualTo(
-                    root.<Date>get("dataVencimento"),
+                    root.<LocalDate>get("dataVencimento"),
                     lancamentoFilter.getDataVencimentoAte()));
         }        
         

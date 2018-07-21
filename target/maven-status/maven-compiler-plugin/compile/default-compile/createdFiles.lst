@@ -13,6 +13,7 @@ com\example\config\property\ApiProperty.class
 com\example\model\Lancamento.class
 com\example\repository\projection\ResumoLancamento.class
 com\example\SpringBootIntro.class
+com\example\dto\LancamentoEstatisticaDia.class
 com\example\model\Estado.class
 com\example\event\listener\RecursoCriadoListener.class
 com\example\security\AppUserDetailsService.class
@@ -34,6 +35,7 @@ com\example\security\util\BCryptGenerator.class
 com\example\config\OAuthSecurityConfig.class
 com\example\model\TipoLancamento.class
 com\example\token\RefreshTokenCookiePreProcessorFilter.class
+com\example\dto\LancamentoEstatisticaCategoria.class
 com\example\model\Endereco.class
 com\example\exceptionHandler\ApiExceptionHandler$Erro.class
 com\example\resource\PersonagemResource.class

@@ -7,8 +7,7 @@ package com.example.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-//import java.time.LocalDate;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,11 +40,11 @@ public class Lancamento implements Serializable {
     // Necessary because of the diference between Table column name and object model atribute
     @NotNull
     @Column(name = "data_vencimento") 
-    private Date dataVencimento;
+    private LocalDate dataVencimento;
     
     // Necessary because of the diference between Table column name and object model atribute
     @Column(name = "data_pagamento") 
-    private Date dataPagamento;
+    private LocalDate dataPagamento;
     
     @NotNull
     private BigDecimal valor;
@@ -83,19 +82,19 @@ public class Lancamento implements Serializable {
         this.descricao = descricao;
     }
 
-    public Date getDataVencimento() {
+    public LocalDate getDataVencimento() {
         return dataVencimento;
     }
 
-    public void setDataVencimento(Date dataVencimento) {
+    public void setDataVencimento(LocalDate dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
 
-    public Date getDataPagamento() {
+    public LocalDate getDataPagamento() {
         return dataPagamento;
     }
 
-    public void setDataPagamento(Date dataPagamento) {
+    public void setDataPagamento(LocalDate dataPagamento) {
         this.dataPagamento = dataPagamento;
     }
 

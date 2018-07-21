@@ -5,12 +5,15 @@
  */
 package com.example.resource;
 
+import com.example.dto.LancamentoEstatisticaCategoria;
 import com.example.event.RecursoCriadoEvent;
 import com.example.model.Lancamento;
 import com.example.repository.LancamentoRepository;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
 import com.example.service.LancamentoService;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -61,6 +64,12 @@ public class LancamentoResource {
     @CrossOrigin
     public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable) {
         return lancamentoRepository.resume(filter, pageable);
+    }
+    
+    @GetMapping("estatisticas/por-categoria")
+    @CrossOrigin
+    public List<LancamentoEstatisticaCategoria> porCategoria() {
+        return this.lancamentoRepository.porCategoria(LocalDate.now());
     }
     
     // Save on db method

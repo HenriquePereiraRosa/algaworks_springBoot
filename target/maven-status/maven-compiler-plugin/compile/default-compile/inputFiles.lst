@@ -10,6 +10,7 @@ C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\model\E
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\model\Lancamento.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\exceptionHandler\ApiExceptionHandler.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\token\RefreshTokenCookiePreProcessorFilter.java
+C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\dto\LancamentoEstatisticaCategoria.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\repository\filter\LancamentoFilter.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\security\SystemUser.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\resource\PersonagemResource.java
@@ -21,6 +22,7 @@ C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\reposit
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\repository\PersonagemRepository.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\resource\LancamentoResource.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\service\PessoaService.java
+C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\dto\LancamentoEstatisticaDia.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\repository\lancamento\LancamentoRepositoryImpl.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\model\Endereco.java
 C:\Dev\training\algaworks\algaworks_springBoot\src\main\java\com\example\token\wrapper\MyServletRequestWrapper.java
