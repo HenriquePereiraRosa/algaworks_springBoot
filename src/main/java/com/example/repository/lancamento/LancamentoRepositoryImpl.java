@@ -5,10 +5,12 @@
  */
 package com.example.repository.lancamento;
 
+import com.example.dto.LancamentoEstatisticaCategoria;
 import com.example.repository.lancamento.LancamentoRepositoryQuery;
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
+import java.time.LocalDate;
 //import java.time.LocalDate;  #Error (Aula 5.7 - MetaModels)
 import java.util.ArrayList;
 import java.util.Date;
@@ -33,6 +35,32 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
 
     @PersistenceContext // Enable the consults | search Method
     private EntityManager manager;
+    
+    
+    
+    @Override
+    public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mes) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticaCategoria> query = 
+                builder.createQuery(LancamentoEstatisticaCategoria.class);
+        Root<Lancamento> root = query.from(Lancamento.class);
+        query.select(builder.construct(LancamentoEstatisticaCategoria.class, 
+                root.get("categoria").get("nome"),
+                builder.sum(root.get("valor"))));
+        LocalDate firstDay = mes.withDayOfMonth(0);
+        LocalDate lastDay = mes.withDayOfMonth(mes.lengthOfMonth());
+        
+        query.where(
+            builder.greaterThanOrEqualTo(root.<LocalDate>get("dataVencimento"), firstDay),
+            builder.lessThanOrEqualTo(root.<LocalDate>get("dataVencimento"), lastDay));
+        query.groupBy(root.get("categoria"));
+        
+        TypedQuery<LancamentoEstatisticaCategoria> typedQuery = manager
+                        .createQuery(query);
+
+        return typedQuery.getResultList();
+    }
+
     
     @Override
     public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable) {
@@ -121,5 +149,4 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
        return manager.createQuery(criteria).getSingleResult();
     }
 
-    
 }

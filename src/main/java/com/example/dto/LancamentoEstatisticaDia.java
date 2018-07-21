@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.example.repository.filter;
+package com.example.dto;
 
 import com.example.model.TipoLancamento;
 import java.math.BigDecimal;

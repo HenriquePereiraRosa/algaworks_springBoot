@@ -5,9 +5,12 @@
  */
 package com.example.repository.lancamento;
 
+import com.example.dto.LancamentoEstatisticaCategoria;
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -17,7 +20,7 @@ import org.springframework.data.domain.Pageable;
  */
 public interface LancamentoRepositoryQuery {
     
-    public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable);
-    
+    public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
+    public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable);    
     public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable);
 }
