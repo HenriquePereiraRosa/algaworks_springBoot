@@ -11,6 +11,7 @@ import com.example.repository.LancamentoRepository;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
 import com.example.service.LancamentoService;
+import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,8 +78,8 @@ public class LancamentoResource {
     @GetMapping("/{id}")
     @CrossOrigin
     public ResponseEntity<? extends Object> searchById( @PathVariable Long id ) {
-        Lancamento lancamento = lancamentoRepository.getOne(id);
-        return (lancamento == null)? ResponseEntity.notFound().build() : ResponseEntity.ok(lancamento);
+        Optional<Lancamento> lancamento = lancamentoRepository.findById(id);
+        return lancamento.isPresent() ? ResponseEntity.ok(lancamento) : ResponseEntity.notFound().build();
     }
     
     
@@ -87,8 +88,7 @@ public class LancamentoResource {
     @CrossOrigin
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id){
-        Lancamento lancamento = lancamentoRepository.getOne(id);
-        lancamentoRepository.delete(lancamento);
+        lancamentoRepository.deleteById(id);
     }
     
     // Update resourse

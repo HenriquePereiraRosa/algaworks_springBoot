@@ -5,6 +5,7 @@
  */
 package com.example.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 //import java.time.LocalDate;
 import java.util.Date;
@@ -28,7 +29,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "lancamento")
-public class Lancamento {
+public class Lancamento implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

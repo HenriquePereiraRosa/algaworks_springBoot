@@ -7,6 +7,7 @@ package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -28,7 +29,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pessoa")
-public class Pessoa {
+public class Pessoa implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
