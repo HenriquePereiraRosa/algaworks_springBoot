@@ -81,13 +81,6 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         
         TypedQuery<LancamentoEstatisticaDia> typedQuery = manager
                         .createQuery(query);
-        
-        // DEBUG
-        System.out.println("===========================================");
-        System.out.println("TypedQUERY: " + typedQuery.getResultList());
-        System.out.println("===========================================");
-        
-
         return typedQuery.getResultList();
     }
 

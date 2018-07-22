@@ -85,7 +85,7 @@ public class LancamentoResource {
     @GetMapping("estatisticas/por-dia")
     @CrossOrigin
     public List<LancamentoEstatisticaDia> porDia() {
-        return this.lancamentoRepository.porDia(LocalDate.of(2018, 3, 1)); // LocalDate.now());
+        return this.lancamentoRepository.porDia(LocalDate.of(2018, 6, 1)); // LocalDate.now());
     }
     
     // Save on db method
