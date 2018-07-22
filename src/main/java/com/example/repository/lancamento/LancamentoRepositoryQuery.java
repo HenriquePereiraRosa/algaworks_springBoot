@@ -6,6 +6,7 @@
 package com.example.repository.lancamento;
 
 import com.example.dto.LancamentoEstatisticaCategoria;
+import com.example.dto.LancamentoEstatisticaDia;
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
@@ -21,6 +22,7 @@ import org.springframework.data.domain.Pageable;
 public interface LancamentoRepositoryQuery {
     
     public List<LancamentoEstatisticaCategoria> porCategoria(LocalDate mesReferencia);
+    public List<LancamentoEstatisticaDia> porDia(LocalDate mesReferencia);
     public Page<Lancamento> search(LancamentoFilter filter, Pageable pageable);    
     public Page<ResumoLancamento> resume(LancamentoFilter filter, Pageable pageable);
 }

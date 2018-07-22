@@ -6,6 +6,7 @@
 package com.example.repository.lancamento;
 
 import com.example.dto.LancamentoEstatisticaCategoria;
+import com.example.dto.LancamentoEstatisticaDia;
 import com.example.repository.lancamento.LancamentoRepositoryQuery;
 import com.example.model.Lancamento;
 import com.example.repository.filter.LancamentoFilter;
@@ -48,13 +49,44 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery {
         LocalDate firstDay = mes.withDayOfMonth(1);
         LocalDate lastDay = mes.withDayOfMonth(mes.lengthOfMonth());
         
-        query.where(
-            builder.greaterThanOrEqualTo(root.<LocalDate>get("dataVencimento"), firstDay),
-            builder.lessThanOrEqualTo(root.<LocalDate>get("dataVencimento"), lastDay));
+//        query.where(
+//            builder.greaterThanOrEqualTo(root.<LocalDate>get("dataVencimento"), mes),
+//            builder.lessThanOrEqualTo(root.<LocalDate>get("dataVencimento"), mes));
         query.groupBy(root.get("categoria"));
         
         TypedQuery<LancamentoEstatisticaCategoria> typedQuery = manager
                         .createQuery(query);
+
+        return typedQuery.getResultList();
+    }
+    
+    @Override
+    public List<LancamentoEstatisticaDia> porDia(LocalDate mes) {
+        CriteriaBuilder builder = manager.getCriteriaBuilder();
+        CriteriaQuery<LancamentoEstatisticaDia> query = 
+                builder.createQuery(LancamentoEstatisticaDia.class);
+        Root<Lancamento> root = query.from(Lancamento.class);
+        query.select(builder.construct(LancamentoEstatisticaDia.class, 
+                root.get("tipo"),
+                root.get("dataVencimento"),
+                builder.sum(root.get("valor"))));
+        LocalDate firstDay = mes.withDayOfMonth(1);
+        LocalDate lastDay = mes.withDayOfMonth(mes.lengthOfMonth());
+        
+//        query.where(
+//            builder.greaterThanOrEqualTo(root.<LocalDate>get("dataVencimento"), firstDay),
+//            builder.lessThanOrEqualTo(root.<LocalDate>get("dataVencimento"), lastDay));
+
+        query.groupBy(root.get("valor"), root.get("dataVencimento"));
+        
+        TypedQuery<LancamentoEstatisticaDia> typedQuery = manager
+                        .createQuery(query);
+        
+        // DEBUG
+        System.out.println("===========================================");
+        System.out.println("TypedQUERY: " + typedQuery.getResultList());
+        System.out.println("===========================================");
+        
 
         return typedQuery.getResultList();
     }

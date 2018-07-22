@@ -6,6 +6,7 @@
 package com.example.resource;
 
 import com.example.dto.LancamentoEstatisticaCategoria;
+import com.example.dto.LancamentoEstatisticaDia;
 import com.example.event.RecursoCriadoEvent;
 import com.example.model.Lancamento;
 import com.example.repository.LancamentoRepository;
@@ -13,6 +14,7 @@ import com.example.repository.filter.LancamentoFilter;
 import com.example.repository.projection.ResumoLancamento;
 import com.example.service.LancamentoService;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
@@ -69,7 +71,21 @@ public class LancamentoResource {
     @GetMapping("estatisticas/por-categoria")
     @CrossOrigin
     public List<LancamentoEstatisticaCategoria> porCategoria() {
-        return this.lancamentoRepository.porCategoria(LocalDate.now());
+        return this.lancamentoRepository.porCategoria(LocalDate.of(2018, 6, 29)); // LocalDate.now());
+    }
+    
+    // TODO: To implement & do Tests!!!!
+    @GetMapping("estatisticas/por-categoria/{localDate}")
+    @CrossOrigin
+    public List<LancamentoEstatisticaCategoria> porCategoria(@PathVariable String stringDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+        return this.lancamentoRepository.porCategoria(LocalDate.parse(stringDate, formatter));
+    }
+    
+    @GetMapping("estatisticas/por-dia")
+    @CrossOrigin
+    public List<LancamentoEstatisticaDia> porDia() {
+        return this.lancamentoRepository.porDia(LocalDate.of(2018, 3, 1)); // LocalDate.now());
     }
     
     // Save on db method
